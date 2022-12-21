@@ -5,7 +5,7 @@ import (
 	"gin-mongo-api/routes" //add this
 	"os"
 
-	// "time"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -28,13 +28,24 @@ import (
 // }
 
 func main() {
-	router := gin.Default()
-
-	//run database
 	configs.ConnectDB()
-
-	//routes
-	routes.UserRoute(router)              //add this
+	router := gin.Default()
+	// CORS for https://foo.com and https://github.com origins, allowing:
+	// - PUT and PATCH methods
+	// - Origin header
+	// - Credentials share
+	// - Preflight requests cached for 12 hours
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"https://resplendent-dragon-4ca5a6.netlify.app"},
+		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == "https://sbc-sebatcabut.herokuapp.com"
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 	routes.InvertebrataRoute(router)      //add this
 	routes.VertebrataRoute(router)        //add this
 	routes.FosilRoute(router)             //add this
@@ -42,30 +53,6 @@ func main() {
 	routes.SumberDayaGeologiRoute(router) //add this
 	routes.LokasiTemuanRoute(router)      //add this
 	routes.KoordinatRoute(router)         //add this
-
-	corsConfig := cors.DefaultConfig()
-
-	corsConfig.AllowOrigins = []string{"https://resplendent-dragon-4ca5a6.netlify.app"}
-	// To be able to send tokens to the server.
-	corsConfig.AllowCredentials = true
-
-	// OPTIONS method for ReactJS
-	corsConfig.AddAllowMethods("POST, OPTIONS, GET, PUT, DELETE")
-
-	// Register the middleware
-	router.Use(cors.New(corsConfig))
-
-	// router.Use(cors.New(cors.Config{
-	// 	AllowOrigins:     []string{"https://resplendent-dragon-4ca5a6.netlify.app"},
-	// 	AllowMethods:     []string{"PUT", "PATCH", "POST", "OPTIONS", "GET", "DELETE"},
-	// 	AllowHeaders:     []string{"Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization", "Accept", "Origin", "Cache-Control", "X-Requested-With"},
-	// 	ExposeHeaders:    []string{"Content-Length"},
-	// 	AllowCredentials: true,
-	// 	AllowOriginFunc: func(origin string) bool {
-	// 		return origin == "https://sbc-sebatcabut.herokuapp.com"
-	// 	},
-	// 	MaxAge: 12 * time.Hour,
-	// }))
 
 	router.Run(":" + SetPort())
 }

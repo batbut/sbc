@@ -36,7 +36,7 @@ func main() {
 	// - Credentials share
 	// - Preflight requests cached for 12 hours
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"https://resplendent-dragon-4ca5a6.netlify.app", "https://batbut.github.io"},
+		AllowOrigins:     []string{"https://resplendent-dragon-4ca5a6.netlify.app", "https://batbut.github.io", "https://museumgeologibandung.netlify.app/"},
 		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},

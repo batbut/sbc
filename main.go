@@ -3,6 +3,7 @@ package main
 import (
 	"gin-mongo-api/configs"
 	"gin-mongo-api/routes" //add this
+	"net/http"
 	"os"
 
 	"time"
@@ -46,6 +47,11 @@ func main() {
 		},
 		MaxAge: 12 * time.Hour,
 	}))
+
+	// Swagger
+	fs := http.FileServer(http.Dir("./swaggerui"))
+	http.Handle("/swaggerui/", http.StripPrefix("/swaggerui/", fs))
+
 	routes.InvertebrataRoute(router)      //add this
 	routes.VertebrataRoute(router)        //add this
 	routes.FosilRoute(router)             //add this

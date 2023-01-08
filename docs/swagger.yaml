@@ -1,4 +1,139 @@
+openapi: 3.0.1
 info:
-  contact: {}
-paths: {}
-swagger: "2.0"
+  title: defaultTitle
+  description: defaultDescription
+  version: '0.1'
+servers:
+  - url: https://sbc-sebatcabut.herokuapp.com
+paths:
+  /fosils:
+    get:
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+      servers:
+        - url: https://sbc-sebatcabut.herokuapp.com
+    servers:
+      - url: https://sbc-sebatcabut.herokuapp.com
+  /fosil/63ba2b1e9c3fd6f60b6a1184:
+    put:
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lokasi_temuan:
+                  type: string
+                tahun_perolehan:
+                  type: string
+                keterangan:
+                  type: string
+                determinator:
+                  type: string
+                nama_koleksi:
+                  type: string
+                no_inventaris:
+                  type: string
+                no_register:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "no_register": "MGB-011",
+                      "no_inventaris": "FIM011",
+                      "nama_koleksi": "Scopacus",
+                      "lokasi_temuan": "Atjeh, Teunom",
+                      "tahun_perolehan": "1935",
+                      "determinator": "Oostingh",
+                      "keterangan": "Label Fosil"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: https://sbc-sebatcabut.herokuapp.com
+    delete:
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: https://sbc-sebatcabut.herokuapp.com
+    servers:
+      - url: https://sbc-sebatcabut.herokuapp.com
+  /fosil/638da9a8dba540cf8b62b890:
+    get:
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: https://sbc-sebatcabut.herokuapp.com
+    servers:
+      - url: https://sbc-sebatcabut.herokuapp.com
+  /fosil:
+    post:
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lokasi_temuan:
+                  type: string
+                tahun_perolehan:
+                  type: string
+                keterangan:
+                  type: string
+                determinator:
+                  type: string
+                nama_koleksi:
+                  type: string
+                no_inventaris:
+                  type: string
+                no_register:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "no_register": "MGB-011",
+                      "no_inventaris": "FIM011",
+                      "nama_koleksi": "Scopacus",
+                      "lokasi_temuan": "Atjeh",
+                      "tahun_perolehan": "1935",
+                      "determinator": "Oostingh",
+                      "keterangan": "Label Fosil"
+                  }
+      responses:
+        '201':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: https://sbc-sebatcabut.herokuapp.com
+    servers:
+      - url: https://sbc-sebatcabut.herokuapp.com

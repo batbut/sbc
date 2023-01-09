@@ -3,7 +3,8 @@ package main
 import (
 	"gin-mongo-api/configs"
 	"gin-mongo-api/routes" //add this
-	"net/http"
+
+	// "net/http"
 	"os"
 
 	"time"
@@ -38,7 +39,7 @@ func main() {
 	// - Preflight requests cached for 12 hours
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
+		AllowMethods:     []string{"*"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
@@ -48,9 +49,9 @@ func main() {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	// Swagger
-	fs := http.FileServer(http.Dir("./swaggerui"))
-	http.Handle("/swaggerui/", http.StripPrefix("/swaggerui/", fs))
+	// // Swagger
+	// fs := http.FileServer(http.Dir("./docs/index.html"))
+	// http.Handle("/docs/index.html/", http.StripPrefix("/docs/index.html/", fs))
 
 	routes.InvertebrataRoute(router)      //add this
 	routes.VertebrataRoute(router)        //add this

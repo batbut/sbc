@@ -62,6 +62,15 @@ func CreateBatuan() gin.HandlerFunc {
 			Skala:            batuan.Skala,
 			CaraPerolehan:    batuan.CaraPerolehan,
 			TahunPerolehan:   batuan.TahunPerolehan,
+			Kolektor:         batuan.Kolektor,
+			Kepemilikan:      batuan.Kepemilikan,
+			Operator:         batuan.Operator,
+			TanggalDicatat:   batuan.TanggalDicatat,
+			NilaiPerolehan:   batuan.NilaiPerolehan,
+			NilaiBuku:        batuan.NilaiBuku,
+			Foto:             batuan.Foto,
+			Foto2:            batuan.Foto2,
+			Foto3:            batuan.Foto3,
 		}
 
 		result, err := batuanCollection.InsertOne(ctx, newBatuan)
@@ -114,7 +123,7 @@ func EditBatuan() gin.HandlerFunc {
 			return
 		}
 
-		update := bson.M{"no_register": batuan.NoRegister, "no_inventaris": batuan.NoInventaris, "kode_bmn": batuan.KodeBmn, "nup_bmn": batuan.NupBmn, "merk_bmn": batuan.MerkBmn, "satuan": batuan.Satuan, "kelompok_koleksi": batuan.KelompokKoleksi, "jenis_koleksi": batuan.JenisKoleksi, "sub_jenis_koleksi": batuan.SubJenisKoleksi, "kode_jenis_koleksi": batuan.KodeJenisKoleksi, "ruang_simpan": batuan.RuangSimpan, "lokasi_simpan": batuan.LokasiSimpan, "kondisi": batuan.Kondisi, "nama_koleksi": batuan.NamaKoleksi, "keterangan": batuan.Keterangan, "nama_formasi": batuan.NamaFormasi, "lokasi_temuan": batuan.LokasiTemuan, "koordinat": batuan.Koordinat, "pulau": batuan.Pulau, "peta": batuan.Peta, "lembar_peta": batuan.LembarPeta, "skala": batuan.Skala, "cara_perolehan": batuan.CaraPerolehan, "tahun_perolehan": batuan.TahunPerolehan}
+		update := bson.M{"no_register": batuan.NoRegister, "no_inventaris": batuan.NoInventaris, "kode_bmn": batuan.KodeBmn, "nup_bmn": batuan.NupBmn, "merk_bmn": batuan.MerkBmn, "satuan": batuan.Satuan, "kelompok_koleksi": batuan.KelompokKoleksi, "jenis_koleksi": batuan.JenisKoleksi, "sub_jenis_koleksi": batuan.SubJenisKoleksi, "kode_jenis_koleksi": batuan.KodeJenisKoleksi, "ruang_simpan": batuan.RuangSimpan, "lokasi_simpan": batuan.LokasiSimpan, "kondisi": batuan.Kondisi, "nama_koleksi": batuan.NamaKoleksi, "keterangan": batuan.Keterangan, "nama_formasi": batuan.NamaFormasi, "lokasi_temuan": batuan.LokasiTemuan, "koordinat": batuan.Koordinat, "pulau": batuan.Pulau, "peta": batuan.Peta, "lembar_peta": batuan.LembarPeta, "skala": batuan.Skala, "cara_perolehan": batuan.CaraPerolehan, "tahun_perolehan": batuan.TahunPerolehan, "kolektor": batuan.Kolektor, "kepemilikan": batuan.Kepemilikan, "operator": batuan.Operator, "tanggal_dicatat": batuan.TanggalDicatat, "nilai_perolehan": batuan.NilaiPerolehan, "nilai_buku": batuan.NilaiBuku, "foto": batuan.Foto, "foto_2": batuan.Foto2, "foto_3": batuan.Foto3}
 		result, err := batuanCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
 
 		if err != nil {

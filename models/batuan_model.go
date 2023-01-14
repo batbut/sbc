@@ -28,4 +28,13 @@ type Batuan struct {
 	Skala            string             `json:"skala" bson:"skala" validate:"required"`
 	CaraPerolehan    string             `json:"cara_perolehan" bson:"cara_perolehan" validate:"required"`
 	TahunPerolehan   string             `json:"tahun_perolehan" bson:"tahun_perolehan" validate:"required"`
+	Kolektor         string             `json:"kolektor" bson:"kolektor" validate:"required"`
+	Kepemilikan      string             `json:"kepemilikan" bson:"kepemilikan" validate:"required"`
+	Operator         string             `json:"operator" bson:"operator" validate:"required"`
+	TanggalDicatat   string             `json:"tanggal_dicatat" bson:"tanggal_dicatat" validate:"required"`
+	NilaiPerolehan   string             `json:"nilai_perolehan" bson:"nilai_perolehan" validate:"required"`
+	NilaiBuku        string             `json:"nilai_buku" bson:"nilai_buku" validate:"required"`
+	Foto             string             `json:"foto" bson:"foto" validate:"required"`
+	Foto2            string             `json:"foto_2" bson:"foto_2" validate:"required"`
+	Foto3            string             `json:"foto_3" bson:"foto_3" validate:"required"`
 }

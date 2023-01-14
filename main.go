@@ -24,7 +24,7 @@ func main() {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},
-		AllowHeaders:     []string{"Origin"},
+		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
@@ -40,6 +40,7 @@ func main() {
 	routes.SumberDayaGeologiRoute(router) //add this
 	routes.LokasiTemuanRoute(router)      //add this
 	routes.KoordinatRoute(router)         //add this
+	routes.UserRoute(router)              //add this
 
 	router.Run(":" + SetPort())
 }

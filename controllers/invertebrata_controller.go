@@ -94,7 +94,7 @@ func EditInvertebrata() gin.HandlerFunc {
 		}
 
 		update := bson.M{"nama": invertebrata.Nama, "lokasi_ditemukan": invertebrata.Lokasi_Ditemukan, "waktu_ditemukan": invertebrata.Waktu_Ditemukan}
-		result, err := invertebrataCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
+		result, err := invertebrataCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.InvertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
@@ -104,7 +104,7 @@ func EditInvertebrata() gin.HandlerFunc {
 		//get updated invertebrata details
 		var updatedInvertebrata models.Invertebrata
 		if result.MatchedCount == 1 {
-			err := invertebrataCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedInvertebrata)
+			err := invertebrataCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&updatedInvertebrata)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, responses.InvertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 				return
@@ -123,7 +123,7 @@ func DeleteInvertebrata() gin.HandlerFunc {
 
 		objId, _ := primitive.ObjectIDFromHex(invertebrataId)
 
-		result, err := invertebrataCollection.DeleteOne(ctx, bson.M{"id": objId})
+		result, err := invertebrataCollection.DeleteOne(ctx, bson.M{"_id": objId})
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.InvertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})

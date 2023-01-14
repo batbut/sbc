@@ -62,7 +62,7 @@ func GetInvertebrata() gin.HandlerFunc {
 
 		objId, _ := primitive.ObjectIDFromHex(invertebrataId)
 
-		err := invertebrataCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&invertebrata)
+		err := invertebrataCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&invertebrata)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.InvertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 			return

@@ -4,7 +4,6 @@ import (
 	"gin-mongo-api/configs"
 	"gin-mongo-api/routes" //add this
 
-	// "net/http"
 	"os"
 
 	"time"
@@ -16,11 +15,6 @@ import (
 func main() {
 	configs.ConnectDB()
 	router := gin.Default()
-	// CORS for https://foo.com and https://github.com origins, allowing:
-	// - PUT and PATCH methods
-	// - Origin header
-	// - Credentials share
-	// - Preflight requests cached for 12 hours
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},
@@ -40,7 +34,7 @@ func main() {
 	routes.SumberDayaGeologiRoute(router) //add this
 	routes.LokasiTemuanRoute(router)      //add this
 	routes.KoordinatRoute(router)         //add this
-	routes.UserRoute(router)              //add this
+	routes.JenisKoleksiRoute(router)      //add this
 
 	router.Run(":" + SetPort())
 }

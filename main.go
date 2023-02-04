@@ -32,6 +32,7 @@ func main() {
 	routes.FosilRoute(router)             //add this
 	routes.BatuanRoute(router)            //add this
 	routes.SumberDayaGeologiRoute(router) //add this
+	routes.BmnRoute(router)               //add this
 	routes.LokasiTemuanRoute(router)      //add this
 	routes.KoordinatRoute(router)         //add this
 	routes.JenisKoleksiRoute(router)      //add this

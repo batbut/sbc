@@ -37,10 +37,46 @@ func CreateVertebrata() gin.HandlerFunc {
 		}
 
 		newVertebrata := models.Vertebrata{
-			Id:               primitive.NewObjectID(),
-			Nama:             vertebrata.Nama,
-			Lokasi_Ditemukan: vertebrata.Lokasi_Ditemukan,
-			Waktu_Ditemukan:  vertebrata.Waktu_Ditemukan,
+			Id: primitive.NewObjectID(),
+			No: struct {
+				Registrasi    string "bson:\"Registrasi\" json:\"registrasi\" validate:\"required\""
+				Inventarisasi string "bson:\"Inventarisasi\" json:\"inventarisasi\" validate:\"required\""
+				Laci          string "bson:\"Laci\" json:\"laci\" validate:\"required\""
+				Kotak         string "bson:\"Kotak\" json:\"kotak\" validate:\"required\""
+				KoleksiBaru   string "bson:\"Koleksi Baru\" json:\"koleksi_baru\" validate:\"required\""
+				KoleksiLama   string "bson:\"Koleksi Lama\" json:\"koleksi_lama\" validate:\"required\""
+			}{
+				Registrasi:    vertebrata.No.Registrasi,
+				Inventarisasi: vertebrata.No.Inventarisasi,
+				Laci:          vertebrata.No.Laci,
+				Kotak:         vertebrata.No.Kotak,
+				KoleksiBaru:   vertebrata.No.KoleksiBaru,
+				KoleksiLama:   vertebrata.No.KoleksiLama,
+			},
+			Pulau:              vertebrata.Pulau,
+			Spesies:            vertebrata.Spesies,
+			Famili:             vertebrata.Famili,
+			JenisKoleksi:       vertebrata.JenisKoleksi,
+			Determinasi:        vertebrata.Determinasi,
+			Spesimen:           vertebrata.Spesimen,
+			TipeKoleksi:        vertebrata.TipeKoleksi,
+			JumlahUtuh:         vertebrata.JumlahUtuh,
+			JumlahPecahan:      vertebrata.JumlahPecahan,
+			JumlahGabungan:     vertebrata.JumlahGabungan,
+			Lokasi:             vertebrata.Lokasi,
+			KoordinatLokasi:    vertebrata.KoordinatLokasi,
+			Formasi:            vertebrata.Formasi,
+			CaraPerolehan:      vertebrata.CaraPerolehan,
+			Umur:               vertebrata.Umur,
+			ReferensiPublikasi: vertebrata.ReferensiPublikasi,
+			Kolektor:           vertebrata.Kolektor,
+			TahunPenemuan:      vertebrata.TahunPenemuan,
+			Literatur:          vertebrata.Literatur,
+			Extra:              vertebrata.Extra,
+			KondisiBenda:       vertebrata.KondisiBenda,
+			Keterangan:         vertebrata.Keterangan,
+			TanggalPencatatan:  vertebrata.TanggalPencatatan,
+			Foto:               vertebrata.Foto,
 		}
 
 		result, err := vertebrataCollection.InsertOne(ctx, newVertebrata)
@@ -62,7 +98,7 @@ func GetVertebrata() gin.HandlerFunc {
 
 		objId, _ := primitive.ObjectIDFromHex(vertebrataId)
 
-		err := vertebrataCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&vertebrata)
+		err := vertebrataCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&vertebrata)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.VertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 			return
@@ -93,8 +129,41 @@ func EditVertebrata() gin.HandlerFunc {
 			return
 		}
 
-		update := bson.M{"nama": vertebrata.Nama, "lokasi_ditemukan": vertebrata.Lokasi_Ditemukan, "waktu_ditemukan": vertebrata.Waktu_Ditemukan}
-		result, err := vertebrataCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
+		update := bson.M{
+			"No": bson.M{
+				"Registrasi":    vertebrata.No.Registrasi,
+				"Inventarisasi": vertebrata.No.Inventarisasi,
+				"Laci":          vertebrata.No.Laci,
+				"Kotak":         vertebrata.No.Kotak,
+				"Koleksi Baru":  vertebrata.No.KoleksiBaru,
+				"Koleksi Lama":  vertebrata.No.KoleksiLama,
+			},
+			"Pulau":               vertebrata.Pulau,
+			"Spesies":             vertebrata.Spesies,
+			"Famili":              vertebrata.Famili,
+			"Jenis Koleksi":       vertebrata.JenisKoleksi,
+			"Determinasi":         vertebrata.Determinasi,
+			"Spesimen":            vertebrata.Spesimen,
+			"Tipe Koleksi":        vertebrata.TipeKoleksi,
+			"Jumlah Utuh":         vertebrata.JumlahUtuh,
+			"Jumlah Pecahan":      vertebrata.JumlahPecahan,
+			"Jumlah Gabungan":     vertebrata.JumlahGabungan,
+			"Lokasi":              vertebrata.Lokasi,
+			"Koordinat Lokasi":    vertebrata.KoordinatLokasi,
+			"Formasi":             vertebrata.Formasi,
+			"Cara Perolehan":      vertebrata.CaraPerolehan,
+			"Umur":                vertebrata.Umur,
+			"Referensi Publikasi": vertebrata.ReferensiPublikasi,
+			"Kolektor":            vertebrata.Kolektor,
+			"Tahun Penemuan":      vertebrata.TahunPenemuan,
+			"Literatur":           vertebrata.Literatur,
+			"Extra":               vertebrata.Extra,
+			"Kondisi Benda":       vertebrata.KondisiBenda,
+			"Keterangan":          vertebrata.Keterangan,
+			"Tanggal Pencatatan":  vertebrata.TanggalPencatatan,
+			"Foto":                vertebrata.Foto,
+		}
+		result, err := vertebrataCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.VertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
@@ -104,7 +173,7 @@ func EditVertebrata() gin.HandlerFunc {
 		//get updated Vertebrata details
 		var updatedVertebrata models.Vertebrata
 		if result.MatchedCount == 1 {
-			err := vertebrataCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedVertebrata)
+			err := vertebrataCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&updatedVertebrata)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, responses.VertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 				return
@@ -123,7 +192,7 @@ func DeleteVertebrata() gin.HandlerFunc {
 
 		objId, _ := primitive.ObjectIDFromHex(vertebrataId)
 
-		result, err := vertebrataCollection.DeleteOne(ctx, bson.M{"id": objId})
+		result, err := vertebrataCollection.DeleteOne(ctx, bson.M{"_id": objId})
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.VertebrataResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})

@@ -27,6 +27,7 @@ func main() {
 		MaxAge: 12 * time.Hour,
 	}))
 
+	routes.UserRoute(router)              //add this
 	routes.InvertebrataRoute(router)      //add this
 	routes.VertebrataRoute(router)        //add this
 	routes.FosilRoute(router)             //add this

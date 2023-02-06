@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// var JwtSecret = "yoursecretkey"
+var JwtSecret = "yoursecretkey"
 
 // // var EncryptionKey = []byte("yoursecretkey")
 

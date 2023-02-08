@@ -37,6 +37,7 @@ func main() {
 	routes.LokasiTemuanRoute(router)      //add this
 	routes.KoordinatRoute(router)         //add this
 	routes.JenisKoleksiRoute(router)      //add this
+	routes.StorageRoute(router)           //add this
 
 	router.Run(":" + SetPort())
 }

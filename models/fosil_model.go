@@ -4,11 +4,11 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type Fosil struct {
 	Id    primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
-	Nomor struct {
+	Nomer struct {
 		No_Reg  string `bson:"No_Reg" json:"No_Reg" validate:"required"`
 		No_Inv  string `bson:"No_Inv" json:"No_Inv" validate:"required"`
 		No_Awal string `bson:"No_Awal" json:"No_Awal" validate:"required"`
-	} `bson:"Nomor" json:"Nommor"`
+	} `bson:"Nomer" json:"Nomer"`
 	Badan_Milik_Negara struct {
 		Kode_Bmn string `bson:"Kode_Bmn" json:"Kode_Bmn" validate:"required"`
 		Nup_Bmn  string `bson:"Nup_Bmn" json:"Nup_Bmn" validate:"required"`
@@ -24,9 +24,10 @@ type Fosil struct {
 	Cara_Perolehan string `bson:"Cara_Perolehan" json:"Cara_Perolehan" validate:"required"`
 	Umur           string `json:"Umur" bson:"Umur" validate:"required"`
 	Nama_Satuan    string `json:"Nama_Satuan" bson:"Nama_Satuan" validate:"required"`
+	Kondisi        string `json:"Kondisi" bson:"Kondisi" validate:"required"`
 	Dalam_Negri    struct {
 		Nama_Provinsi  string `bson:"Nama_Provinsi" json:"Nama_Provinsi" validate:"required"`
-		Nama_kabupaten string `bson:"Nama_Kabupaten" json:"Nama_Kabupaten" validate:"required"`
+		Nama_Kabupaten string `bson:"Nama_Kabupaten" json:"Nama_Kabupaten" validate:"required"`
 	} `bson:"Dalam_Negri" json:"Dalam_Negri"`
 	Luar_Negri struct {
 		Keterangan_LN string `bson:"Keterangan_LN" json:"Keterangan_LN" validate:"required"`

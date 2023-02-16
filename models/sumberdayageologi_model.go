@@ -4,11 +4,11 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type SumberDayaGeologi struct {
 	Id    primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
-	Nomor struct {
+	Nomer struct {
 		No_Reg  string `bson:"No_Reg" json:"No_Reg" validate:"required"`
 		No_Inv  string `bson:"No_Inv" json:"No_Inv" validate:"required"`
 		No_Awal string `bson:"No_Awal" json:"No_Awal" validate:"required"`
-	} `bson:"Nomor" json:"Nommor"`
+	} `bson:"Nomer" json:"Nomer"`
 	Badan_Milik_Negara struct {
 		Kode_Bmn string `bson:"Kode_Bmn" json:"Kode_Bmn" validate:"required"`
 		Nup_Bmn  string `bson:"Nup_Bmn" json:"Nup_Bmn" validate:"required"`
@@ -26,7 +26,7 @@ type SumberDayaGeologi struct {
 	Nama_Satuan    string `json:"Nama_Satuan" bson:"Nama_Satuan" validate:"required"`
 	Dalam_Negri    struct {
 		Nama_Provinsi  string `bson:"Nama_Provinsi" json:"Nama_Provinsi" validate:"required"`
-		Nama_kabupaten string `bson:"Nama_Kabupaten" json:"Nama_Kabupaten" validate:"required"`
+		Nama_Kabupaten string `bson:"Nama_Kabupaten" json:"Nama_Kabupaten" validate:"required"`
 	} `bson:"Dalam_Negri" json:"Dalam_Negri"`
 	Luar_Negri struct {
 		Keterangan_LN string `bson:"Keterangan_LN" json:"Keterangan_LN" validate:"required"`
@@ -52,6 +52,7 @@ type SumberDayaGeologi struct {
 	} `bson:"Lokasi_Non_Storage" json:"Lokasi_Non_Storage"`
 	Nama_Formasi     string `bson:"Nama_Formasi" json:"Nama_Formasi" validate:"required"`
 	Keterangan       string `bson:"Keterangan" json:"Keterangan" validate:"required"`
+	Kondisi          string `bson:"Kondisi" json:"Kondisi" validate:"required"`
 	Pulau            string `bson:"Pulau" json:"Pulau" validate:"required"`
 	Alamat_Lengkap   string `bson:"Alamat_Lengkap" json:"Alamat_Lengkap" validate:"required"`
 	Koordinat_X      string `bson:"Koordinat_X" json:"Koordinat_X" validate:"required"`

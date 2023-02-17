@@ -19,6 +19,16 @@ import (
 var sumberdayageologiCollection *mongo.Collection = configs.GetCollection(configs.DB, "sumberdayageologi")
 var validate_sumberdayageologi = validator.New()
 
+// CreateSumberDayaGeologi godoc
+// @Summary Create a new Sumber Daya Geologi
+// @Description Create a new Sumber Daya Geologi with the input payload
+// @Tags Sumber Daya Geologi
+// @Accept  json
+// @Produce  json
+// @Param sumberdayageologi body models.SumberDayaGeologi true "The Sumber Daya Geologi to create"
+// @Success 200 {object} responses.SumberDayaGeologiResponse
+// @Failure 400 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologi [post]
 func CreateSumberDayaGeologi() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -149,6 +159,16 @@ func CreateSumberDayaGeologi() gin.HandlerFunc {
 	}
 }
 
+// GetSumberDayaGeologi godoc
+// @Summary Get Sumber Daya Geologi By ID
+// @Description Get a Sumber Daya Geologi By its ID
+// @Tags Sumber Daya Geologi
+// @ID get-sumberdayageologi-by-id
+// @Produce json
+// @Param sumberdayageologiId path string true "Sumber Daya Geologi ID"
+// @Success 200 {object} responses.SumberDayaGeologiResponse
+// @Failure 500 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologi/{sumberdayageologiId} [get]
 func GetSumberDayaGeologi() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -168,6 +188,17 @@ func GetSumberDayaGeologi() gin.HandlerFunc {
 	}
 }
 
+// EditSumberDayaGeologi edits an existing Sumber Daya Geologi.
+// @Summary Edit an existing Sumber Daya Geologi
+// @Description Edit an existing Sumber Daya Geologi
+// @Tags Sumber Daya Geologi
+// @Accept json
+// @Produce json
+// @Param sumberdayageologiId path string true "ID of the Sumber Daya Geologi to edit"
+// @Param body body models.SumberDayaGeologi true "Sumber Daya Geologi object that needs to be edited"
+// @Success 200 {object} responses.SumberDayaGeologiResponse
+// @Failure 400 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologi/{sumberdayageologiId} [put]
 func EditSumberDayaGeologi() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -276,6 +307,16 @@ func EditSumberDayaGeologi() gin.HandlerFunc {
 	}
 }
 
+// DeleteSumberDayaGeologi godoc
+// @Summary Delete a Sumber Daya Geologi by ID
+// @Description Delete a Sumber Daya Geologi by ID
+// @Tags Sumber Daya Geologi
+// @Param sumberdayageologiId path string true "ID of the Sumber Daya Geologi to delete"
+// @Produce json
+// @Success 200 {object} responses.SumberDayaGeologiResponse
+// @Failure 404 {object} responses.SumberDayaGeologiResponse
+// @Failure 500 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologi/{sumberdayageologiId} [delete]
 func DeleteSumberDayaGeologi() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -304,6 +345,15 @@ func DeleteSumberDayaGeologi() gin.HandlerFunc {
 	}
 }
 
+// GetAllSumberDayaGeologis godoc
+// @Summary Get all Sumber Daya Geologi
+// @Description Retrieve all Sumber Daya Geologi from the database
+// @Tags Sumber Daya Geologi
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} responses.SumberDayaGeologiResponse
+// @Failure 500 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologis [get]
 func GetAllSumberDayaGeologis() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -334,6 +384,15 @@ func GetAllSumberDayaGeologis() gin.HandlerFunc {
 	}
 }
 
+// ExportSumberDayaGeologiToExcel export data Sumber Daya Geologi to excel.
+// @Summary Export data Sumber Daya Geologi to excel
+// @Description Get data Sumber Daya Geologi from MongoDB and export to excel
+// @Tags Sumber Daya Geologi
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "Data Sumber Daya Geologi exported to excel successfully"
+// @Failure 500 {object} responses.SumberDayaGeologiResponse
+// @Router /sumberdayageologis/export [get]
 func ExportSumberDayaGeologiToExcel() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

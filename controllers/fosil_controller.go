@@ -19,6 +19,16 @@ import (
 var fosilCollection *mongo.Collection = configs.GetCollection(configs.DB, "fosil")
 var validate_fosil = validator.New()
 
+// CreateFosil godoc
+// @Summary Create a new Fosil
+// @Description Create a new Fosil with the input payload
+// @Tags Fosil
+// @Accept  json
+// @Produce  json
+// @Param fosil body models.Fosil true "The fosil to create"
+// @Success 200 {object} responses.FosilResponse
+// @Failure 400 {object} responses.FosilResponse
+// @Router /fosil [post]
 func CreateFosil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -149,6 +159,16 @@ func CreateFosil() gin.HandlerFunc {
 	}
 }
 
+// GetFosil godoc
+// @Summary Get Fosil by ID
+// @Description Get a Fosil by its ID
+// @Tags Fosil
+// @ID get-fosil-by-id
+// @Produce json
+// @Param fosilId path string true "Fosil ID"
+// @Success 200 {object} responses.FosilResponse
+// @Failure 500 {object} responses.FosilResponse
+// @Router /fosil/{fosilId} [get]
 func GetFosil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -168,6 +188,17 @@ func GetFosil() gin.HandlerFunc {
 	}
 }
 
+// EditFosil edits an existing Fosil.
+// @Summary Edit an existing Fosil
+// @Description Edit an existing Fosil
+// @Tags Fosil
+// @Accept json
+// @Produce json
+// @Param fosilId path string true "ID of the Fosil to edit"
+// @Param body body models.Fosil true "Fosil object that needs to be edited"
+// @Success 200 {object} responses.FosilResponse
+// @Failure 400 {object} responses.FosilResponse
+// @Router /fosil/{fosilId} [put]
 func EditFosil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -276,6 +307,16 @@ func EditFosil() gin.HandlerFunc {
 	}
 }
 
+// DeleteFosil godoc
+// @Summary Delete a fosil by ID
+// @Description Delete a fosil by ID
+// @Tags Fosil
+// @Param fosilId path string true "ID of the fosil to delete"
+// @Produce json
+// @Success 200 {object} responses.FosilResponse
+// @Failure 404 {object} responses.FosilResponse
+// @Failure 500 {object} responses.FosilResponse
+// @Router /fosil/{fosilId} [delete]
 func DeleteFosil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -304,6 +345,15 @@ func DeleteFosil() gin.HandlerFunc {
 	}
 }
 
+// GetAllFosils godoc
+// @Summary Get all fosils
+// @Description Retrieve all fosils from the database
+// @Tags Fosil
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} responses.FosilResponse
+// @Failure 500 {object} responses.FosilResponse
+// @Router /fosils [get]
 func GetAllFosils() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -334,6 +384,15 @@ func GetAllFosils() gin.HandlerFunc {
 	}
 }
 
+// ExportFosilToExcel export data fosil to excel.
+// @Summary Export data fosil to excel
+// @Description Get data fosil from MongoDB and export to excel
+// @Tags Fosil
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "Data fosil exported to excel successfully"
+// @Failure 500 {object} responses.FosilResponse
+// @Router /fosils/export [get]
 func ExportFosilToExcel() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

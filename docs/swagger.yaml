@@ -1,139 +1,1018 @@
-openapi: 3.0.1
+basePath: /v1
+definitions:
+  models.Batuan:
+    properties:
+      Alamat_Lengkap:
+        type: string
+      Barang_Milik_Negara:
+        properties:
+          Kode_Bmn:
+            type: string
+          Merk_Bmn:
+            type: string
+          Nup_Bmn:
+            type: string
+        required:
+        - Kode_Bmn
+        - Merk_Bmn
+        - Nup_Bmn
+        type: object
+      Cara_Perolehan:
+        type: string
+      Dalam_Negeri:
+        properties:
+          Nama_Kabupaten:
+            type: string
+          Nama_Provinsi:
+            type: string
+        required:
+        - Nama_Kabupaten
+        - Nama_Provinsi
+        type: object
+      Gambar_1:
+        type: string
+      Gambar_2:
+        type: string
+      Gambar_3:
+        type: string
+      Kepemilikan_Awal:
+        type: string
+      Keterangan:
+        type: string
+      Koleksi:
+        properties:
+          Deskripsi_Koleksi:
+            type: string
+          Jenis_Koleksi:
+            type: string
+          Kelompok_Koleksi:
+            type: string
+          Kode_Jenis_Koleksi:
+            type: string
+          Nama_Koleksi:
+            type: string
+          Sub_Jenis_Koleksi:
+            type: string
+        required:
+        - Deskripsi_Koleksi
+        - Jenis_Koleksi
+        - Kelompok_Koleksi
+        - Kode_Jenis_Koleksi
+        - Nama_Koleksi
+        - Sub_Jenis_Koleksi
+        type: object
+      Kolektor:
+        type: string
+      Kondisi:
+        type: string
+      Koordinat_X:
+        type: string
+      Koordinat_Y:
+        type: string
+      Koordinat_Z:
+        type: string
+      Lokasi_Non_Storage:
+        properties:
+          Nama_Non_Storage:
+            type: string
+        required:
+        - Nama_Non_Storage
+        type: object
+      Lokasi_Storage:
+        properties:
+          Laci:
+            type: string
+          Lajur:
+            type: string
+          Lantai:
+            type: string
+          Lemari:
+            type: string
+          Ruang_Storage:
+            type: string
+          Slot:
+            type: string
+        required:
+        - Laci
+        - Lajur
+        - Lantai
+        - Lemari
+        - Ruang_Storage
+        - Slot
+        type: object
+      Luar_Negeri:
+        properties:
+          Keterangan_LN:
+            type: string
+        required:
+        - Keterangan_LN
+        type: object
+      Nama_Formasi:
+        type: string
+      Nama_Satuan:
+        type: string
+      Nilai_Buku:
+        type: string
+      Nilai_Perolehan:
+        type: string
+      Nomer:
+        properties:
+          No_Awal:
+            type: string
+          No_Inv:
+            type: string
+          No_Reg:
+            type: string
+        required:
+        - No_Awal
+        - No_Inv
+        - No_Reg
+        type: object
+      Peta:
+        properties:
+          Koleksi_Peta:
+            type: string
+          Lembar_Peta:
+            type: string
+          Nama_Peta:
+            type: string
+          Skala_Peta:
+            type: string
+        required:
+        - Koleksi_Peta
+        - Lembar_Peta
+        - Nama_Peta
+        - Skala_Peta
+        type: object
+      Publikasi:
+        type: string
+      Pulau:
+        type: string
+      Tahun_Perolehan:
+        type: string
+      URL:
+        type: string
+      Umur:
+        type: string
+      determinator:
+        type: string
+      id:
+        type: string
+    required:
+    - Alamat_Lengkap
+    - Cara_Perolehan
+    - Gambar_1
+    - Gambar_2
+    - Gambar_3
+    - Kepemilikan_Awal
+    - Keterangan
+    - Kolektor
+    - Kondisi
+    - Koordinat_X
+    - Koordinat_Y
+    - Koordinat_Z
+    - Nama_Formasi
+    - Nama_Satuan
+    - Nilai_Buku
+    - Nilai_Perolehan
+    - Publikasi
+    - Pulau
+    - Tahun_Perolehan
+    - URL
+    - Umur
+    - determinator
+    type: object
+  models.Fosil:
+    properties:
+      Alamat_Lengkap:
+        type: string
+      Barang_Milik_Negara:
+        properties:
+          Kode_Bmn:
+            type: string
+          Merk_Bmn:
+            type: string
+          Nup_Bmn:
+            type: string
+        required:
+        - Kode_Bmn
+        - Merk_Bmn
+        - Nup_Bmn
+        type: object
+      Cara_Perolehan:
+        type: string
+      Dalam_Negeri:
+        properties:
+          Nama_Kabupaten:
+            type: string
+          Nama_Provinsi:
+            type: string
+        required:
+        - Nama_Kabupaten
+        - Nama_Provinsi
+        type: object
+      Gambar_1:
+        type: string
+      Gambar_2:
+        type: string
+      Gambar_3:
+        type: string
+      Kepemilikan_Awal:
+        type: string
+      Keterangan:
+        type: string
+      Koleksi:
+        properties:
+          Deskripsi_Koleksi:
+            type: string
+          Jenis_Koleksi:
+            type: string
+          Kelompok_Koleksi:
+            type: string
+          Kode_Jenis_Koleksi:
+            type: string
+          Nama_Koleksi:
+            type: string
+          Sub_Jenis_Koleksi:
+            type: string
+        required:
+        - Deskripsi_Koleksi
+        - Jenis_Koleksi
+        - Kelompok_Koleksi
+        - Kode_Jenis_Koleksi
+        - Nama_Koleksi
+        - Sub_Jenis_Koleksi
+        type: object
+      Kolektor:
+        type: string
+      Kondisi:
+        type: string
+      Koordinat_X:
+        type: string
+      Koordinat_Y:
+        type: string
+      Koordinat_Z:
+        type: string
+      Lokasi_Non_Storage:
+        properties:
+          Nama_Non_Storage:
+            type: string
+        required:
+        - Nama_Non_Storage
+        type: object
+      Lokasi_Storage:
+        properties:
+          Laci:
+            type: string
+          Lajur:
+            type: string
+          Lantai:
+            type: string
+          Lemari:
+            type: string
+          Ruang_Storage:
+            type: string
+          Slot:
+            type: string
+        required:
+        - Laci
+        - Lajur
+        - Lantai
+        - Lemari
+        - Ruang_Storage
+        - Slot
+        type: object
+      Luar_Negeri:
+        properties:
+          Keterangan_LN:
+            type: string
+        required:
+        - Keterangan_LN
+        type: object
+      Nama_Formasi:
+        type: string
+      Nama_Satuan:
+        type: string
+      Nilai_Buku:
+        type: string
+      Nilai_Perolehan:
+        type: string
+      Nomer:
+        properties:
+          No_Awal:
+            type: string
+          No_Inv:
+            type: string
+          No_Reg:
+            type: string
+        required:
+        - No_Awal
+        - No_Inv
+        - No_Reg
+        type: object
+      Peta:
+        properties:
+          Koleksi_Peta:
+            type: string
+          Lembar_Peta:
+            type: string
+          Nama_Peta:
+            type: string
+          Skala_Peta:
+            type: string
+        required:
+        - Koleksi_Peta
+        - Lembar_Peta
+        - Nama_Peta
+        - Skala_Peta
+        type: object
+      Publikasi:
+        type: string
+      Pulau:
+        type: string
+      Tahun_Perolehan:
+        type: string
+      URL:
+        type: string
+      Umur:
+        type: string
+      determinator:
+        type: string
+      id:
+        type: string
+    required:
+    - Alamat_Lengkap
+    - Cara_Perolehan
+    - Gambar_1
+    - Gambar_2
+    - Gambar_3
+    - Kepemilikan_Awal
+    - Keterangan
+    - Kolektor
+    - Kondisi
+    - Koordinat_X
+    - Koordinat_Y
+    - Koordinat_Z
+    - Nama_Formasi
+    - Nama_Satuan
+    - Nilai_Buku
+    - Nilai_Perolehan
+    - Publikasi
+    - Pulau
+    - Tahun_Perolehan
+    - URL
+    - Umur
+    - determinator
+    type: object
+  models.SumberDayaGeologi:
+    properties:
+      Alamat_Lengkap:
+        type: string
+      Barang_Milik_Negara:
+        properties:
+          Kode_Bmn:
+            type: string
+          Merk_Bmn:
+            type: string
+          Nup_Bmn:
+            type: string
+        required:
+        - Kode_Bmn
+        - Merk_Bmn
+        - Nup_Bmn
+        type: object
+      Cara_Perolehan:
+        type: string
+      Dalam_Negeri:
+        properties:
+          Nama_Kabupaten:
+            type: string
+          Nama_Provinsi:
+            type: string
+        required:
+        - Nama_Kabupaten
+        - Nama_Provinsi
+        type: object
+      Gambar_1:
+        type: string
+      Gambar_2:
+        type: string
+      Gambar_3:
+        type: string
+      Kepemilikan_Awal:
+        type: string
+      Keterangan:
+        type: string
+      Koleksi:
+        properties:
+          Deskripsi_Koleksi:
+            type: string
+          Jenis_Koleksi:
+            type: string
+          Kelompok_Koleksi:
+            type: string
+          Kode_Jenis_Koleksi:
+            type: string
+          Nama_Koleksi:
+            type: string
+          Sub_Jenis_Koleksi:
+            type: string
+        required:
+        - Deskripsi_Koleksi
+        - Jenis_Koleksi
+        - Kelompok_Koleksi
+        - Kode_Jenis_Koleksi
+        - Nama_Koleksi
+        - Sub_Jenis_Koleksi
+        type: object
+      Kolektor:
+        type: string
+      Kondisi:
+        type: string
+      Koordinat_X:
+        type: string
+      Koordinat_Y:
+        type: string
+      Koordinat_Z:
+        type: string
+      Lokasi_Non_Storage:
+        properties:
+          Nama_Non_Storage:
+            type: string
+        required:
+        - Nama_Non_Storage
+        type: object
+      Lokasi_Storage:
+        properties:
+          Laci:
+            type: string
+          Lajur:
+            type: string
+          Lantai:
+            type: string
+          Lemari:
+            type: string
+          Ruang_Storage:
+            type: string
+          Slot:
+            type: string
+        required:
+        - Laci
+        - Lajur
+        - Lantai
+        - Lemari
+        - Ruang_Storage
+        - Slot
+        type: object
+      Luar_Negeri:
+        properties:
+          Keterangan_LN:
+            type: string
+        required:
+        - Keterangan_LN
+        type: object
+      Nama_Formasi:
+        type: string
+      Nama_Satuan:
+        type: string
+      Nilai_Buku:
+        type: string
+      Nilai_Perolehan:
+        type: string
+      Nomer:
+        properties:
+          No_Awal:
+            type: string
+          No_Inv:
+            type: string
+          No_Reg:
+            type: string
+        required:
+        - No_Awal
+        - No_Inv
+        - No_Reg
+        type: object
+      Peta:
+        properties:
+          Koleksi_Peta:
+            type: string
+          Lembar_Peta:
+            type: string
+          Nama_Peta:
+            type: string
+          Skala_Peta:
+            type: string
+        required:
+        - Koleksi_Peta
+        - Lembar_Peta
+        - Nama_Peta
+        - Skala_Peta
+        type: object
+      Publikasi:
+        type: string
+      Pulau:
+        type: string
+      Tahun_Perolehan:
+        type: string
+      URL:
+        type: string
+      Umur:
+        type: string
+      determinator:
+        type: string
+      id:
+        type: string
+    required:
+    - Alamat_Lengkap
+    - Cara_Perolehan
+    - Gambar_1
+    - Gambar_2
+    - Gambar_3
+    - Kepemilikan_Awal
+    - Keterangan
+    - Kolektor
+    - Kondisi
+    - Koordinat_X
+    - Koordinat_Y
+    - Koordinat_Z
+    - Nama_Formasi
+    - Nama_Satuan
+    - Nilai_Buku
+    - Nilai_Perolehan
+    - Publikasi
+    - Pulau
+    - Tahun_Perolehan
+    - URL
+    - Umur
+    - determinator
+    type: object
+  responses.BatuanResponse:
+    properties:
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  responses.FosilResponse:
+    properties:
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  responses.SumberDayaGeologiResponse:
+    properties:
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+host: https://sbc-sebatcabut.herokuapp.com/
 info:
-  title: defaultTitle
-  description: defaultDescription
-  version: '0.1'
-servers:
-  - url: https://sbc-sebatcabut.herokuapp.com
+  contact: {}
+  description: API Batuan, Fosil dan Sumber Daya Geologi
+  title: Museum Geologi Bandung
+  version: "1.0"
 paths:
-  /fosils:
-    get:
-      description: Auto generated using Swagger Inspector
+  /batuan:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Batuan with the input payload
+      parameters:
+      - description: The batuan to create
+        in: body
+        name: batuan
+        required: true
+        schema:
+          $ref: '#/definitions/models.Batuan'
+      produces:
+      - application/json
       responses:
-        '200':
-          description: Auto generated using Swagger Inspector
-      servers:
-        - url: https://sbc-sebatcabut.herokuapp.com
-    servers:
-      - url: https://sbc-sebatcabut.herokuapp.com
-  /fosil/63ba2b1e9c3fd6f60b6a1184:
-    put:
-      description: Auto generated using Swagger Inspector
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                lokasi_temuan:
-                  type: string
-                tahun_perolehan:
-                  type: string
-                keterangan:
-                  type: string
-                determinator:
-                  type: string
-                nama_koleksi:
-                  type: string
-                no_inventaris:
-                  type: string
-                no_register:
-                  type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "no_register": "MGB-011",
-                      "no_inventaris": "FIM011",
-                      "nama_koleksi": "Scopacus",
-                      "lokasi_temuan": "Atjeh, Teunom",
-                      "tahun_perolehan": "1935",
-                      "determinator": "Oostingh",
-                      "keterangan": "Label Fosil"
-                  }
-      responses:
-        '200':
-          description: Auto generated using Swagger Inspector
-          content:
-            application/json; charset=utf-8:
-              schema:
-                type: string
-              examples: {}
-      servers:
-        - url: https://sbc-sebatcabut.herokuapp.com
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Create a new Batuan
+      tags:
+      - Batuan
+  /batuan/{batuanId}:
     delete:
-      description: Auto generated using Swagger Inspector
+      description: Delete a batuan by ID
+      parameters:
+      - description: ID of the batuan to delete
+        in: path
+        name: batuanId
+        required: true
+        type: string
+      produces:
+      - application/json
       responses:
-        '200':
-          description: Auto generated using Swagger Inspector
-          content:
-            application/json; charset=utf-8:
-              schema:
-                type: string
-              examples: {}
-      servers:
-        - url: https://sbc-sebatcabut.herokuapp.com
-    servers:
-      - url: https://sbc-sebatcabut.herokuapp.com
-  /fosil/638da9a8dba540cf8b62b890:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Delete a batuan by ID
+      tags:
+      - Batuan
     get:
-      description: Auto generated using Swagger Inspector
+      description: Get a Batuan by its ID
+      operationId: get-batuan-by-id
+      parameters:
+      - description: Batuan ID
+        in: path
+        name: batuanId
+        required: true
+        type: string
+      produces:
+      - application/json
       responses:
-        '200':
-          description: Auto generated using Swagger Inspector
-          content:
-            application/json; charset=utf-8:
-              schema:
-                type: string
-              examples: {}
-      servers:
-        - url: https://sbc-sebatcabut.herokuapp.com
-    servers:
-      - url: https://sbc-sebatcabut.herokuapp.com
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Get Batuan by ID
+      tags:
+      - Batuan
+    put:
+      consumes:
+      - application/json
+      description: Edit an existing Batuan
+      parameters:
+      - description: ID of the Batuan to edit
+        in: path
+        name: batuanId
+        required: true
+        type: string
+      - description: Batuan object that needs to be edited
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Batuan'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Edit an existing Batuan
+      tags:
+      - Batuan
+  /batuans:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all batuans from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Get all batuans
+      tags:
+      - Batuan
+  /batuans/export:
+    get:
+      consumes:
+      - application/json
+      description: Get data batuan from MongoDB and export to excel
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data batuan exported to excel successfully
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.BatuanResponse'
+      summary: Export data batuan to excel
+      tags:
+      - Batuan
   /fosil:
     post:
-      description: Auto generated using Swagger Inspector
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                lokasi_temuan:
-                  type: string
-                tahun_perolehan:
-                  type: string
-                keterangan:
-                  type: string
-                determinator:
-                  type: string
-                nama_koleksi:
-                  type: string
-                no_inventaris:
-                  type: string
-                no_register:
-                  type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "no_register": "MGB-011",
-                      "no_inventaris": "FIM011",
-                      "nama_koleksi": "Scopacus",
-                      "lokasi_temuan": "Atjeh",
-                      "tahun_perolehan": "1935",
-                      "determinator": "Oostingh",
-                      "keterangan": "Label Fosil"
-                  }
+      consumes:
+      - application/json
+      description: Create a new Fosil with the input payload
+      parameters:
+      - description: The fosil to create
+        in: body
+        name: fosil
+        required: true
+        schema:
+          $ref: '#/definitions/models.Fosil'
+      produces:
+      - application/json
       responses:
-        '201':
-          description: Auto generated using Swagger Inspector
-          content:
-            application/json; charset=utf-8:
-              schema:
-                type: string
-              examples: {}
-      servers:
-        - url: https://sbc-sebatcabut.herokuapp.com
-    servers:
-      - url: https://sbc-sebatcabut.herokuapp.com
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Create a new Fosil
+      tags:
+      - Fosil
+  /fosil/{fosilId}:
+    delete:
+      description: Delete a fosil by ID
+      parameters:
+      - description: ID of the fosil to delete
+        in: path
+        name: fosilId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Delete a fosil by ID
+      tags:
+      - Fosil
+    get:
+      description: Get a Fosil by its ID
+      operationId: get-fosil-by-id
+      parameters:
+      - description: Fosil ID
+        in: path
+        name: fosilId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Get Fosil by ID
+      tags:
+      - Fosil
+    put:
+      consumes:
+      - application/json
+      description: Edit an existing Fosil
+      parameters:
+      - description: ID of the Fosil to edit
+        in: path
+        name: fosilId
+        required: true
+        type: string
+      - description: Fosil object that needs to be edited
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Fosil'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Edit an existing Fosil
+      tags:
+      - Fosil
+  /fosils:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all fosils from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Get all fosils
+      tags:
+      - Fosil
+  /fosils/export:
+    get:
+      consumes:
+      - application/json
+      description: Get data fosil from MongoDB and export to excel
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data fosil exported to excel successfully
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.FosilResponse'
+      summary: Export data fosil to excel
+      tags:
+      - Fosil
+  /sumberdayageologi:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Sumber Daya Geologi with the input payload
+      parameters:
+      - description: The Sumber Daya Geologi to create
+        in: body
+        name: sumberdayageologi
+        required: true
+        schema:
+          $ref: '#/definitions/models.SumberDayaGeologi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Create a new Sumber Daya Geologi
+      tags:
+      - Sumber Daya Geologi
+  /sumberdayageologi/{sumberdayageologiId}:
+    delete:
+      description: Delete a Sumber Daya Geologi by ID
+      parameters:
+      - description: ID of the Sumber Daya Geologi to delete
+        in: path
+        name: sumberdayageologiId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Delete a Sumber Daya Geologi by ID
+      tags:
+      - Sumber Daya Geologi
+    get:
+      description: Get a Sumber Daya Geologi By its ID
+      operationId: get-sumberdayageologi-by-id
+      parameters:
+      - description: Sumber Daya Geologi ID
+        in: path
+        name: sumberdayageologiId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Get Sumber Daya Geologi By ID
+      tags:
+      - Sumber Daya Geologi
+    put:
+      consumes:
+      - application/json
+      description: Edit an existing Sumber Daya Geologi
+      parameters:
+      - description: ID of the Sumber Daya Geologi to edit
+        in: path
+        name: sumberdayageologiId
+        required: true
+        type: string
+      - description: Sumber Daya Geologi object that needs to be edited
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.SumberDayaGeologi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Edit an existing Sumber Daya Geologi
+      tags:
+      - Sumber Daya Geologi
+  /sumberdayageologis:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all Sumber Daya Geologi from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Get all Sumber Daya Geologi
+      tags:
+      - Sumber Daya Geologi
+  /sumberdayageologis/export:
+    get:
+      consumes:
+      - application/json
+      description: Get data Sumber Daya Geologi from MongoDB and export to excel
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data Sumber Daya Geologi exported to excel successfully
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.SumberDayaGeologiResponse'
+      summary: Export data Sumber Daya Geologi to excel
+      tags:
+      - Sumber Daya Geologi
+swagger: "2.0"

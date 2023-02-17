@@ -19,6 +19,16 @@ import (
 var batuanCollection *mongo.Collection = configs.GetCollection(configs.DB, "batuan")
 var validate_batuan = validator.New()
 
+// CreateBatuan godoc
+// @Summary Create a new Batuan
+// @Description Create a new Batuan with the input payload
+// @Tags Batuan
+// @Accept  json
+// @Produce  json
+// @Param batuan body models.Batuan true "The batuan to create"
+// @Success 200 {object} responses.BatuanResponse
+// @Failure 400 {object} responses.BatuanResponse
+// @Router /batuan [post]
 func CreateBatuan() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -149,6 +159,16 @@ func CreateBatuan() gin.HandlerFunc {
 	}
 }
 
+// GetBatuan godoc
+// @Summary Get Batuan by ID
+// @Description Get a Batuan by its ID
+// @Tags Batuan
+// @ID get-batuan-by-id
+// @Produce json
+// @Param batuanId path string true "Batuan ID"
+// @Success 200 {object} responses.BatuanResponse
+// @Failure 500 {object} responses.BatuanResponse
+// @Router /batuan/{batuanId} [get]
 func GetBatuan() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -168,6 +188,17 @@ func GetBatuan() gin.HandlerFunc {
 	}
 }
 
+// EditBatuan edits an existing Batuan.
+// @Summary Edit an existing Batuan
+// @Description Edit an existing Batuan
+// @Tags Batuan
+// @Accept json
+// @Produce json
+// @Param batuanId path string true "ID of the Batuan to edit"
+// @Param body body models.Batuan true "Batuan object that needs to be edited"
+// @Success 200 {object} responses.BatuanResponse
+// @Failure 400 {object} responses.BatuanResponse
+// @Router /batuan/{batuanId} [put]
 func EditBatuan() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -276,6 +307,16 @@ func EditBatuan() gin.HandlerFunc {
 	}
 }
 
+// DeleteBatuan godoc
+// @Summary Delete a batuan by ID
+// @Description Delete a batuan by ID
+// @Tags Batuan
+// @Param batuanId path string true "ID of the batuan to delete"
+// @Produce json
+// @Success 200 {object} responses.BatuanResponse
+// @Failure 404 {object} responses.BatuanResponse
+// @Failure 500 {object} responses.BatuanResponse
+// @Router /batuan/{batuanId} [delete]
 func DeleteBatuan() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -304,6 +345,15 @@ func DeleteBatuan() gin.HandlerFunc {
 	}
 }
 
+// GetAllBatuans godoc
+// @Summary Get all batuans
+// @Description Retrieve all batuans from the database
+// @Tags Batuan
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} responses.BatuanResponse
+// @Failure 500 {object} responses.BatuanResponse
+// @Router /batuans [get]
 func GetAllBatuans() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -334,6 +384,15 @@ func GetAllBatuans() gin.HandlerFunc {
 	}
 }
 
+// ExportBatuanToExcel export data batuan to excel.
+// @Summary Export data batuan to excel
+// @Description Get data batuan from MongoDB and export to excel
+// @Tags Batuan
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "Data batuan exported to excel successfully"
+// @Failure 500 {object} responses.BatuanResponse
+// @Router /batuans/export [get]
 func ExportBatuanToExcel() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

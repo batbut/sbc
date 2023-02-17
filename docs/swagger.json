@@ -1,7 +1,1488 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "API Batuan, Fosil dan Sumber Daya Geologi",
+        "title": "Museum Geologi Bandung",
+        "contact": {},
+        "version": "1.0"
     },
-    "paths": {}
+    "host": "https://sbc-sebatcabut.herokuapp.com/",
+    "basePath": "/v1",
+    "paths": {
+        "/batuan": {
+            "post": {
+                "description": "Create a new Batuan with the input payload",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Create a new Batuan",
+                "parameters": [
+                    {
+                        "description": "The batuan to create",
+                        "name": "batuan",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Batuan"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/batuan/{batuanId}": {
+            "get": {
+                "description": "Get a Batuan by its ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Get Batuan by ID",
+                "operationId": "get-batuan-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Batuan ID",
+                        "name": "batuanId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Edit an existing Batuan",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Edit an existing Batuan",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the Batuan to edit",
+                        "name": "batuanId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Batuan object that needs to be edited",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Batuan"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a batuan by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Delete a batuan by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the batuan to delete",
+                        "name": "batuanId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/batuans": {
+            "get": {
+                "description": "Retrieve all batuans from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Get all batuans",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/batuans/export": {
+            "get": {
+                "description": "Get data batuan from MongoDB and export to excel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Batuan"
+                ],
+                "summary": "Export data batuan to excel",
+                "responses": {
+                    "200": {
+                        "description": "Data batuan exported to excel successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.BatuanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fosil": {
+            "post": {
+                "description": "Create a new Fosil with the input payload",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Create a new Fosil",
+                "parameters": [
+                    {
+                        "description": "The fosil to create",
+                        "name": "fosil",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Fosil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fosil/{fosilId}": {
+            "get": {
+                "description": "Get a Fosil by its ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Get Fosil by ID",
+                "operationId": "get-fosil-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Fosil ID",
+                        "name": "fosilId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Edit an existing Fosil",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Edit an existing Fosil",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the Fosil to edit",
+                        "name": "fosilId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Fosil object that needs to be edited",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Fosil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a fosil by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Delete a fosil by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the fosil to delete",
+                        "name": "fosilId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fosils": {
+            "get": {
+                "description": "Retrieve all fosils from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Get all fosils",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fosils/export": {
+            "get": {
+                "description": "Get data fosil from MongoDB and export to excel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Fosil"
+                ],
+                "summary": "Export data fosil to excel",
+                "responses": {
+                    "200": {
+                        "description": "Data fosil exported to excel successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.FosilResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sumberdayageologi": {
+            "post": {
+                "description": "Create a new Sumber Daya Geologi with the input payload",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Create a new Sumber Daya Geologi",
+                "parameters": [
+                    {
+                        "description": "The Sumber Daya Geologi to create",
+                        "name": "sumberdayageologi",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SumberDayaGeologi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sumberdayageologi/{sumberdayageologiId}": {
+            "get": {
+                "description": "Get a Sumber Daya Geologi By its ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Get Sumber Daya Geologi By ID",
+                "operationId": "get-sumberdayageologi-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Sumber Daya Geologi ID",
+                        "name": "sumberdayageologiId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Edit an existing Sumber Daya Geologi",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Edit an existing Sumber Daya Geologi",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the Sumber Daya Geologi to edit",
+                        "name": "sumberdayageologiId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Sumber Daya Geologi object that needs to be edited",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SumberDayaGeologi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a Sumber Daya Geologi by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Delete a Sumber Daya Geologi by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the Sumber Daya Geologi to delete",
+                        "name": "sumberdayageologiId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sumberdayageologis": {
+            "get": {
+                "description": "Retrieve all Sumber Daya Geologi from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Get all Sumber Daya Geologi",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sumberdayageologis/export": {
+            "get": {
+                "description": "Get data Sumber Daya Geologi from MongoDB and export to excel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Sumber Daya Geologi"
+                ],
+                "summary": "Export data Sumber Daya Geologi to excel",
+                "responses": {
+                    "200": {
+                        "description": "Data Sumber Daya Geologi exported to excel successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.SumberDayaGeologiResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Batuan": {
+            "type": "object",
+            "required": [
+                "Alamat_Lengkap",
+                "Cara_Perolehan",
+                "Gambar_1",
+                "Gambar_2",
+                "Gambar_3",
+                "Kepemilikan_Awal",
+                "Keterangan",
+                "Kolektor",
+                "Kondisi",
+                "Koordinat_X",
+                "Koordinat_Y",
+                "Koordinat_Z",
+                "Nama_Formasi",
+                "Nama_Satuan",
+                "Nilai_Buku",
+                "Nilai_Perolehan",
+                "Publikasi",
+                "Pulau",
+                "Tahun_Perolehan",
+                "URL",
+                "Umur",
+                "determinator"
+            ],
+            "properties": {
+                "Alamat_Lengkap": {
+                    "type": "string"
+                },
+                "Barang_Milik_Negara": {
+                    "type": "object",
+                    "required": [
+                        "Kode_Bmn",
+                        "Merk_Bmn",
+                        "Nup_Bmn"
+                    ],
+                    "properties": {
+                        "Kode_Bmn": {
+                            "type": "string"
+                        },
+                        "Merk_Bmn": {
+                            "type": "string"
+                        },
+                        "Nup_Bmn": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Cara_Perolehan": {
+                    "type": "string"
+                },
+                "Dalam_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Kabupaten",
+                        "Nama_Provinsi"
+                    ],
+                    "properties": {
+                        "Nama_Kabupaten": {
+                            "type": "string"
+                        },
+                        "Nama_Provinsi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Gambar_1": {
+                    "type": "string"
+                },
+                "Gambar_2": {
+                    "type": "string"
+                },
+                "Gambar_3": {
+                    "type": "string"
+                },
+                "Kepemilikan_Awal": {
+                    "type": "string"
+                },
+                "Keterangan": {
+                    "type": "string"
+                },
+                "Koleksi": {
+                    "type": "object",
+                    "required": [
+                        "Deskripsi_Koleksi",
+                        "Jenis_Koleksi",
+                        "Kelompok_Koleksi",
+                        "Kode_Jenis_Koleksi",
+                        "Nama_Koleksi",
+                        "Sub_Jenis_Koleksi"
+                    ],
+                    "properties": {
+                        "Deskripsi_Koleksi": {
+                            "type": "string"
+                        },
+                        "Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kelompok_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kode_Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Nama_Koleksi": {
+                            "type": "string"
+                        },
+                        "Sub_Jenis_Koleksi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Kolektor": {
+                    "type": "string"
+                },
+                "Kondisi": {
+                    "type": "string"
+                },
+                "Koordinat_X": {
+                    "type": "string"
+                },
+                "Koordinat_Y": {
+                    "type": "string"
+                },
+                "Koordinat_Z": {
+                    "type": "string"
+                },
+                "Lokasi_Non_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Non_Storage"
+                    ],
+                    "properties": {
+                        "Nama_Non_Storage": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Lokasi_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Laci",
+                        "Lajur",
+                        "Lantai",
+                        "Lemari",
+                        "Ruang_Storage",
+                        "Slot"
+                    ],
+                    "properties": {
+                        "Laci": {
+                            "type": "string"
+                        },
+                        "Lajur": {
+                            "type": "string"
+                        },
+                        "Lantai": {
+                            "type": "string"
+                        },
+                        "Lemari": {
+                            "type": "string"
+                        },
+                        "Ruang_Storage": {
+                            "type": "string"
+                        },
+                        "Slot": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Luar_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Keterangan_LN"
+                    ],
+                    "properties": {
+                        "Keterangan_LN": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Nama_Formasi": {
+                    "type": "string"
+                },
+                "Nama_Satuan": {
+                    "type": "string"
+                },
+                "Nilai_Buku": {
+                    "type": "string"
+                },
+                "Nilai_Perolehan": {
+                    "type": "string"
+                },
+                "Nomer": {
+                    "type": "object",
+                    "required": [
+                        "No_Awal",
+                        "No_Inv",
+                        "No_Reg"
+                    ],
+                    "properties": {
+                        "No_Awal": {
+                            "type": "string"
+                        },
+                        "No_Inv": {
+                            "type": "string"
+                        },
+                        "No_Reg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Peta": {
+                    "type": "object",
+                    "required": [
+                        "Koleksi_Peta",
+                        "Lembar_Peta",
+                        "Nama_Peta",
+                        "Skala_Peta"
+                    ],
+                    "properties": {
+                        "Koleksi_Peta": {
+                            "type": "string"
+                        },
+                        "Lembar_Peta": {
+                            "type": "string"
+                        },
+                        "Nama_Peta": {
+                            "type": "string"
+                        },
+                        "Skala_Peta": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Publikasi": {
+                    "type": "string"
+                },
+                "Pulau": {
+                    "type": "string"
+                },
+                "Tahun_Perolehan": {
+                    "type": "string"
+                },
+                "URL": {
+                    "type": "string"
+                },
+                "Umur": {
+                    "type": "string"
+                },
+                "determinator": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Fosil": {
+            "type": "object",
+            "required": [
+                "Alamat_Lengkap",
+                "Cara_Perolehan",
+                "Gambar_1",
+                "Gambar_2",
+                "Gambar_3",
+                "Kepemilikan_Awal",
+                "Keterangan",
+                "Kolektor",
+                "Kondisi",
+                "Koordinat_X",
+                "Koordinat_Y",
+                "Koordinat_Z",
+                "Nama_Formasi",
+                "Nama_Satuan",
+                "Nilai_Buku",
+                "Nilai_Perolehan",
+                "Publikasi",
+                "Pulau",
+                "Tahun_Perolehan",
+                "URL",
+                "Umur",
+                "determinator"
+            ],
+            "properties": {
+                "Alamat_Lengkap": {
+                    "type": "string"
+                },
+                "Barang_Milik_Negara": {
+                    "type": "object",
+                    "required": [
+                        "Kode_Bmn",
+                        "Merk_Bmn",
+                        "Nup_Bmn"
+                    ],
+                    "properties": {
+                        "Kode_Bmn": {
+                            "type": "string"
+                        },
+                        "Merk_Bmn": {
+                            "type": "string"
+                        },
+                        "Nup_Bmn": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Cara_Perolehan": {
+                    "type": "string"
+                },
+                "Dalam_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Kabupaten",
+                        "Nama_Provinsi"
+                    ],
+                    "properties": {
+                        "Nama_Kabupaten": {
+                            "type": "string"
+                        },
+                        "Nama_Provinsi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Gambar_1": {
+                    "type": "string"
+                },
+                "Gambar_2": {
+                    "type": "string"
+                },
+                "Gambar_3": {
+                    "type": "string"
+                },
+                "Kepemilikan_Awal": {
+                    "type": "string"
+                },
+                "Keterangan": {
+                    "type": "string"
+                },
+                "Koleksi": {
+                    "type": "object",
+                    "required": [
+                        "Deskripsi_Koleksi",
+                        "Jenis_Koleksi",
+                        "Kelompok_Koleksi",
+                        "Kode_Jenis_Koleksi",
+                        "Nama_Koleksi",
+                        "Sub_Jenis_Koleksi"
+                    ],
+                    "properties": {
+                        "Deskripsi_Koleksi": {
+                            "type": "string"
+                        },
+                        "Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kelompok_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kode_Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Nama_Koleksi": {
+                            "type": "string"
+                        },
+                        "Sub_Jenis_Koleksi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Kolektor": {
+                    "type": "string"
+                },
+                "Kondisi": {
+                    "type": "string"
+                },
+                "Koordinat_X": {
+                    "type": "string"
+                },
+                "Koordinat_Y": {
+                    "type": "string"
+                },
+                "Koordinat_Z": {
+                    "type": "string"
+                },
+                "Lokasi_Non_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Non_Storage"
+                    ],
+                    "properties": {
+                        "Nama_Non_Storage": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Lokasi_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Laci",
+                        "Lajur",
+                        "Lantai",
+                        "Lemari",
+                        "Ruang_Storage",
+                        "Slot"
+                    ],
+                    "properties": {
+                        "Laci": {
+                            "type": "string"
+                        },
+                        "Lajur": {
+                            "type": "string"
+                        },
+                        "Lantai": {
+                            "type": "string"
+                        },
+                        "Lemari": {
+                            "type": "string"
+                        },
+                        "Ruang_Storage": {
+                            "type": "string"
+                        },
+                        "Slot": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Luar_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Keterangan_LN"
+                    ],
+                    "properties": {
+                        "Keterangan_LN": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Nama_Formasi": {
+                    "type": "string"
+                },
+                "Nama_Satuan": {
+                    "type": "string"
+                },
+                "Nilai_Buku": {
+                    "type": "string"
+                },
+                "Nilai_Perolehan": {
+                    "type": "string"
+                },
+                "Nomer": {
+                    "type": "object",
+                    "required": [
+                        "No_Awal",
+                        "No_Inv",
+                        "No_Reg"
+                    ],
+                    "properties": {
+                        "No_Awal": {
+                            "type": "string"
+                        },
+                        "No_Inv": {
+                            "type": "string"
+                        },
+                        "No_Reg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Peta": {
+                    "type": "object",
+                    "required": [
+                        "Koleksi_Peta",
+                        "Lembar_Peta",
+                        "Nama_Peta",
+                        "Skala_Peta"
+                    ],
+                    "properties": {
+                        "Koleksi_Peta": {
+                            "type": "string"
+                        },
+                        "Lembar_Peta": {
+                            "type": "string"
+                        },
+                        "Nama_Peta": {
+                            "type": "string"
+                        },
+                        "Skala_Peta": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Publikasi": {
+                    "type": "string"
+                },
+                "Pulau": {
+                    "type": "string"
+                },
+                "Tahun_Perolehan": {
+                    "type": "string"
+                },
+                "URL": {
+                    "type": "string"
+                },
+                "Umur": {
+                    "type": "string"
+                },
+                "determinator": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.SumberDayaGeologi": {
+            "type": "object",
+            "required": [
+                "Alamat_Lengkap",
+                "Cara_Perolehan",
+                "Gambar_1",
+                "Gambar_2",
+                "Gambar_3",
+                "Kepemilikan_Awal",
+                "Keterangan",
+                "Kolektor",
+                "Kondisi",
+                "Koordinat_X",
+                "Koordinat_Y",
+                "Koordinat_Z",
+                "Nama_Formasi",
+                "Nama_Satuan",
+                "Nilai_Buku",
+                "Nilai_Perolehan",
+                "Publikasi",
+                "Pulau",
+                "Tahun_Perolehan",
+                "URL",
+                "Umur",
+                "determinator"
+            ],
+            "properties": {
+                "Alamat_Lengkap": {
+                    "type": "string"
+                },
+                "Barang_Milik_Negara": {
+                    "type": "object",
+                    "required": [
+                        "Kode_Bmn",
+                        "Merk_Bmn",
+                        "Nup_Bmn"
+                    ],
+                    "properties": {
+                        "Kode_Bmn": {
+                            "type": "string"
+                        },
+                        "Merk_Bmn": {
+                            "type": "string"
+                        },
+                        "Nup_Bmn": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Cara_Perolehan": {
+                    "type": "string"
+                },
+                "Dalam_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Kabupaten",
+                        "Nama_Provinsi"
+                    ],
+                    "properties": {
+                        "Nama_Kabupaten": {
+                            "type": "string"
+                        },
+                        "Nama_Provinsi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Gambar_1": {
+                    "type": "string"
+                },
+                "Gambar_2": {
+                    "type": "string"
+                },
+                "Gambar_3": {
+                    "type": "string"
+                },
+                "Kepemilikan_Awal": {
+                    "type": "string"
+                },
+                "Keterangan": {
+                    "type": "string"
+                },
+                "Koleksi": {
+                    "type": "object",
+                    "required": [
+                        "Deskripsi_Koleksi",
+                        "Jenis_Koleksi",
+                        "Kelompok_Koleksi",
+                        "Kode_Jenis_Koleksi",
+                        "Nama_Koleksi",
+                        "Sub_Jenis_Koleksi"
+                    ],
+                    "properties": {
+                        "Deskripsi_Koleksi": {
+                            "type": "string"
+                        },
+                        "Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kelompok_Koleksi": {
+                            "type": "string"
+                        },
+                        "Kode_Jenis_Koleksi": {
+                            "type": "string"
+                        },
+                        "Nama_Koleksi": {
+                            "type": "string"
+                        },
+                        "Sub_Jenis_Koleksi": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Kolektor": {
+                    "type": "string"
+                },
+                "Kondisi": {
+                    "type": "string"
+                },
+                "Koordinat_X": {
+                    "type": "string"
+                },
+                "Koordinat_Y": {
+                    "type": "string"
+                },
+                "Koordinat_Z": {
+                    "type": "string"
+                },
+                "Lokasi_Non_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Nama_Non_Storage"
+                    ],
+                    "properties": {
+                        "Nama_Non_Storage": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Lokasi_Storage": {
+                    "type": "object",
+                    "required": [
+                        "Laci",
+                        "Lajur",
+                        "Lantai",
+                        "Lemari",
+                        "Ruang_Storage",
+                        "Slot"
+                    ],
+                    "properties": {
+                        "Laci": {
+                            "type": "string"
+                        },
+                        "Lajur": {
+                            "type": "string"
+                        },
+                        "Lantai": {
+                            "type": "string"
+                        },
+                        "Lemari": {
+                            "type": "string"
+                        },
+                        "Ruang_Storage": {
+                            "type": "string"
+                        },
+                        "Slot": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Luar_Negeri": {
+                    "type": "object",
+                    "required": [
+                        "Keterangan_LN"
+                    ],
+                    "properties": {
+                        "Keterangan_LN": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Nama_Formasi": {
+                    "type": "string"
+                },
+                "Nama_Satuan": {
+                    "type": "string"
+                },
+                "Nilai_Buku": {
+                    "type": "string"
+                },
+                "Nilai_Perolehan": {
+                    "type": "string"
+                },
+                "Nomer": {
+                    "type": "object",
+                    "required": [
+                        "No_Awal",
+                        "No_Inv",
+                        "No_Reg"
+                    ],
+                    "properties": {
+                        "No_Awal": {
+                            "type": "string"
+                        },
+                        "No_Inv": {
+                            "type": "string"
+                        },
+                        "No_Reg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Peta": {
+                    "type": "object",
+                    "required": [
+                        "Koleksi_Peta",
+                        "Lembar_Peta",
+                        "Nama_Peta",
+                        "Skala_Peta"
+                    ],
+                    "properties": {
+                        "Koleksi_Peta": {
+                            "type": "string"
+                        },
+                        "Lembar_Peta": {
+                            "type": "string"
+                        },
+                        "Nama_Peta": {
+                            "type": "string"
+                        },
+                        "Skala_Peta": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Publikasi": {
+                    "type": "string"
+                },
+                "Pulau": {
+                    "type": "string"
+                },
+                "Tahun_Perolehan": {
+                    "type": "string"
+                },
+                "URL": {
+                    "type": "string"
+                },
+                "Umur": {
+                    "type": "string"
+                },
+                "determinator": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.BatuanResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "responses.FosilResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "responses.SumberDayaGeologiResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
 }

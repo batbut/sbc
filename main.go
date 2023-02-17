@@ -8,13 +8,26 @@ import (
 
 	"time"
 
+	docs "gin-mongo-api/docs"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title Museum Geologi Bandung
+// @version 1.0
+// @description API Batuan, Fosil dan Sumber Daya Geologi
+// @host https://sbc-sebatcabut.herokuapp.com/
+// @BasePath /v1
 func main() {
 	configs.ConnectDB()
 	router := gin.Default()
+
+	docs.SwaggerInfo.BasePath = ""
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},

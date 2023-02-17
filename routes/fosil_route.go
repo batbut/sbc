@@ -12,4 +12,5 @@ func FosilRoute(router *gin.Engine) {
 	router.PUT("/fosil/:fosilId", controllers.EditFosil())
 	router.DELETE("/fosil/:fosilId", controllers.DeleteFosil())
 	router.GET("/fosils", controllers.GetAllFosils())
+	router.GET("/fosils/export", controllers.ExportBatuanToExcel())
 }

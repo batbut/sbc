@@ -12,4 +12,5 @@ func SumberDayaGeologiRoute(router *gin.Engine) {
 	router.PUT("/sumberdayageologi/:sumberdayageologiId", controllers.EditSumberDayaGeologi())
 	router.DELETE("/sumberdayageologi/:sumberdayageologiId", controllers.DeleteSumberDayaGeologi())
 	router.GET("/sumberdayageologis", controllers.GetAllSumberDayaGeologis())
+	router.GET("/sumberdayageologis/export", controllers.ExportSumberDayaGeologiToExcel())
 }

@@ -10,6 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/tealeg/xlsx"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -37,40 +38,105 @@ func CreateBatuan() gin.HandlerFunc {
 		}
 
 		newBatuan := models.Batuan{
-			Id:               primitive.NewObjectID(),
-			NoRegister:       batuan.NoRegister,
-			NoInventaris:     batuan.NoInventaris,
-			KodeBmn:          batuan.KodeBmn,
-			NupBmn:           batuan.NupBmn,
-			MerkBmn:          batuan.MerkBmn,
-			Satuan:           batuan.Satuan,
-			KelompokKoleksi:  batuan.KelompokKoleksi,
-			JenisKoleksi:     batuan.JenisKoleksi,
-			SubJenisKoleksi:  batuan.SubJenisKoleksi,
-			KodeJenisKoleksi: batuan.KodeJenisKoleksi,
-			RuangSimpan:      batuan.RuangSimpan,
-			LokasiSimpan:     batuan.LokasiSimpan,
-			Kondisi:          batuan.Kondisi,
-			NamaKoleksi:      batuan.NamaKoleksi,
+			Id: primitive.NewObjectID(),
+			Nomer: struct {
+				No_Reg  string "bson:\"No_Reg\" json:\"No_Reg\" validate:\"required\""
+				No_Inv  string "bson:\"No_Inv\" json:\"No_Inv\" validate:\"required\""
+				No_Awal string "bson:\"No_Awal\" json:\"No_Awal\" validate:\"required\""
+			}{
+				No_Reg:  batuan.Nomer.No_Reg,
+				No_Inv:  batuan.Nomer.No_Inv,
+				No_Awal: batuan.Nomer.No_Awal,
+			},
+			Barang_Milik_Negara: struct {
+				Kode_Bmn string "bson:\"Kode_Bmn\" json:\"Kode_Bmn\" validate:\"required\""
+				Nup_Bmn  string "bson:\"Nup_Bmn\" json:\"Nup_Bmn\" validate:\"required\""
+				Merk_Bmn string "bson:\"Merk_Bmn\" json:\"Merk_Bmn\" validate:\"required\""
+			}{
+				Kode_Bmn: batuan.Barang_Milik_Negara.Kode_Bmn,
+				Nup_Bmn:  batuan.Barang_Milik_Negara.Nup_Bmn,
+				Merk_Bmn: batuan.Barang_Milik_Negara.Merk_Bmn,
+			},
+			Determinator: batuan.Determinator,
+			Peta: struct {
+				Nama_Peta    string "bson:\"Nama_Peta\" json:\"Nama_Peta\" validate:\"required\""
+				Skala_Peta   string "bson:\"Skala_Peta\" json:\"Skala_Peta\" validate:\"required\""
+				Koleksi_Peta string "bson:\"Koleksi_Peta\" json:\"Koleksi_Peta\" validate:\"required\""
+				Lembar_Peta  string "bson:\"Lembar_Peta\" json:\"Lembar_Peta\" validate:\"required\""
+			}{
+				Nama_Peta:    batuan.Peta.Nama_Peta,
+				Skala_Peta:   batuan.Peta.Skala_Peta,
+				Koleksi_Peta: batuan.Peta.Koleksi_Peta,
+				Lembar_Peta:  batuan.Peta.Lembar_Peta,
+			},
+			Cara_Perolehan: batuan.Cara_Perolehan,
+			Umur:           batuan.Umur,
+			Nama_Satuan:    batuan.Nama_Satuan,
+			Kondisi:        batuan.Kondisi,
+			Dalam_Negeri: struct {
+				Nama_Provinsi  string "bson:\"Nama_Provinsi\" json:\"Nama_Provinsi\" validate:\"required\""
+				Nama_Kabupaten string "bson:\"Nama_Kabupaten\" json:\"Nama_Kabupaten\" validate:\"required\""
+			}{
+				Nama_Provinsi:  batuan.Dalam_Negeri.Nama_Provinsi,
+				Nama_Kabupaten: batuan.Dalam_Negeri.Nama_Kabupaten,
+			},
+			Luar_Negeri: struct {
+				Keterangan_LN string "bson:\"Keterangan_LN\" json:\"Keterangan_LN\" validate:\"required\""
+			}{
+				Keterangan_LN: batuan.Luar_Negeri.Keterangan_LN,
+			},
+			Koleksi: struct {
+				Nama_Koleksi       string "bson:\"Nama_Koleksi\" json:\"Nama_Koleksi\" validate:\"required\""
+				Jenis_Koleksi      string "bson:\"Jenis_Koleksi\" json:\"Jenis_Koleksi\" validate:\"required\""
+				Sub_Jenis_Koleksi  string "bson:\"Sub_Jenis_Koleksi\" json:\"Sub_Jenis_Koleksi\" validate:\"required\""
+				Kode_Jenis_Koleksi string "bson:\"Kode_Jenis_Koleksi\" json:\"Kode_Jenis_Koleksi\" validate:\"required\""
+				Deskripsi_Koleksi  string "bson:\"Deskripsi_Koleksi\" json:\"Deskripsi_Koleksi\" validate:\"required\""
+				Kelompok_Koleksi   string "bson:\"Kelompok_Koleksi\" json:\"Kelompok_Koleksi\" validate:\"required\""
+			}{
+				Nama_Koleksi:       batuan.Koleksi.Nama_Koleksi,
+				Jenis_Koleksi:      batuan.Koleksi.Jenis_Koleksi,
+				Sub_Jenis_Koleksi:  batuan.Koleksi.Sub_Jenis_Koleksi,
+				Kode_Jenis_Koleksi: batuan.Koleksi.Kode_Jenis_Koleksi,
+				Deskripsi_Koleksi:  batuan.Koleksi.Deskripsi_Koleksi,
+				Kelompok_Koleksi:   batuan.Koleksi.Kelompok_Koleksi,
+			},
+			Lokasi_Storage: struct {
+				Ruang_Storage string "bson:\"Ruang_Storage\" json:\"Ruang_Storage\" validate:\"required\""
+				Lantai        string "bson:\"Lantai\" json:\"Lantai\" validate:\"required\""
+				Lajur         string "bson:\"Lajur\" json:\"Lajur\" validate:\"required\""
+				Lemari        string "bson:\"Lemari\" json:\"Lemari\" validate:\"required\""
+				Laci          string "bson:\"Laci\" json:\"Laci\" validate:\"required\""
+				Slot          string "bson:\"Slot\" json:\"Slot\" validate:\"required\""
+			}{
+				Ruang_Storage: batuan.Lokasi_Storage.Ruang_Storage,
+				Lantai:        batuan.Lokasi_Storage.Lantai,
+				Lajur:         batuan.Lokasi_Storage.Lajur,
+				Lemari:        batuan.Lokasi_Storage.Lemari,
+				Laci:          batuan.Lokasi_Storage.Laci,
+				Slot:          batuan.Lokasi_Storage.Slot,
+			},
+			Lokasi_Non_Storage: struct {
+				Nama_Non_Storage string "bson:\"Nama_Non_Storage\" json:\"Nama_Non_Storage\" validate:\"required\""
+			}{
+				Nama_Non_Storage: batuan.Lokasi_Non_Storage.Nama_Non_Storage,
+			},
+			Nama_Formasi:     batuan.Nama_Formasi,
 			Keterangan:       batuan.Keterangan,
-			NamaFormasi:      batuan.NamaFormasi,
-			LokasiTemuan:     batuan.LokasiTemuan,
-			Koordinat:        batuan.Koordinat,
 			Pulau:            batuan.Pulau,
-			Peta:             batuan.Peta,
-			LembarPeta:       batuan.LembarPeta,
-			Skala:            batuan.Skala,
-			CaraPerolehan:    batuan.CaraPerolehan,
-			TahunPerolehan:   batuan.TahunPerolehan,
+			Alamat_Lengkap:   batuan.Alamat_Lengkap,
+			Koordinat_X:      batuan.Koordinat_X,
+			Koordinat_Y:      batuan.Koordinat_Y,
+			Koordinat_Z:      batuan.Koordinat_Z,
+			Tahun_Perolehan:  batuan.Tahun_Perolehan,
 			Kolektor:         batuan.Kolektor,
-			Kepemilikan:      batuan.Kepemilikan,
-			Operator:         batuan.Operator,
-			TanggalDicatat:   batuan.TanggalDicatat,
-			NilaiPerolehan:   batuan.NilaiPerolehan,
-			NilaiBuku:        batuan.NilaiBuku,
-			Foto:             batuan.Foto,
-			Foto2:            batuan.Foto2,
-			Foto3:            batuan.Foto3,
+			Publikasi:        batuan.Publikasi,
+			Kepemilikan_Awal: batuan.Kepemilikan_Awal,
+			URL:              batuan.URL,
+			Nilai_Perolehan:  batuan.Nilai_Perolehan,
+			Nilai_Buku:       batuan.Nilai_Buku,
+			Gambar_1:         batuan.Gambar_1,
+			Gambar_2:         batuan.Gambar_2,
+			Gambar_3:         batuan.Gambar_3,
 		}
 
 		result, err := batuanCollection.InsertOne(ctx, newBatuan)
@@ -123,7 +189,72 @@ func EditBatuan() gin.HandlerFunc {
 			return
 		}
 
-		update := bson.M{"no_register": batuan.NoRegister, "no_inventaris": batuan.NoInventaris, "kode_bmn": batuan.KodeBmn, "nup_bmn": batuan.NupBmn, "merk_bmn": batuan.MerkBmn, "satuan": batuan.Satuan, "kelompok_koleksi": batuan.KelompokKoleksi, "jenis_koleksi": batuan.JenisKoleksi, "sub_jenis_koleksi": batuan.SubJenisKoleksi, "kode_jenis_koleksi": batuan.KodeJenisKoleksi, "ruang_simpan": batuan.RuangSimpan, "lokasi_simpan": batuan.LokasiSimpan, "kondisi": batuan.Kondisi, "nama_koleksi": batuan.NamaKoleksi, "keterangan": batuan.Keterangan, "nama_formasi": batuan.NamaFormasi, "lokasi_temuan": batuan.LokasiTemuan, "koordinat": batuan.Koordinat, "pulau": batuan.Pulau, "peta": batuan.Peta, "lembar_peta": batuan.LembarPeta, "skala": batuan.Skala, "cara_perolehan": batuan.CaraPerolehan, "tahun_perolehan": batuan.TahunPerolehan, "kolektor": batuan.Kolektor, "kepemilikan": batuan.Kepemilikan, "operator": batuan.Operator, "tanggal_dicatat": batuan.TanggalDicatat, "nilai_perolehan": batuan.NilaiPerolehan, "nilai_buku": batuan.NilaiBuku, "foto": batuan.Foto, "foto_2": batuan.Foto2, "foto_3": batuan.Foto3}
+		update := bson.M{
+			"Nomer": bson.M{
+				"No_Reg":  batuan.Nomer.No_Reg,
+				"No_Inv":  batuan.Nomer.No_Inv,
+				"No_Awal": batuan.Nomer.No_Awal,
+			},
+			"Badan_Milik_Negara": bson.M{
+				"Kode_Bmn": batuan.Barang_Milik_Negara.Kode_Bmn,
+				"Nup_Bmn":  batuan.Barang_Milik_Negara.Nup_Bmn,
+				"Merk_Bmn": batuan.Barang_Milik_Negara.Merk_Bmn,
+			},
+			"Determinator": batuan.Determinator,
+			"Peta": bson.M{
+				"Nama_Peta":    batuan.Peta.Nama_Peta,
+				"Skala_Peta":   batuan.Peta.Skala_Peta,
+				"Koleksi_peta": batuan.Peta.Koleksi_Peta,
+				"Lembar_Peta":  batuan.Peta.Lembar_Peta,
+			},
+			"Cara_Perolehan": batuan.Cara_Perolehan,
+			"Umur":           batuan.Umur,
+			"Nama_Satuan":    batuan.Nama_Satuan,
+			"Kondisi":        batuan.Kondisi,
+			"Dalam_Negeri": bson.M{
+				"Nama_Provinsi":  batuan.Dalam_Negeri.Nama_Provinsi,
+				"Nama_Kabupaten": batuan.Dalam_Negeri.Nama_Kabupaten,
+			},
+			"Luar_Negeri": bson.M{
+				"Keterangan_LN": batuan.Luar_Negeri.Keterangan_LN,
+			},
+			"Koleksi": bson.M{
+				"Nama_Koleksi":       batuan.Koleksi.Nama_Koleksi,
+				"Jenis_Koleksi":      batuan.Koleksi.Jenis_Koleksi,
+				"Sub_Jenis_Koleksi":  batuan.Koleksi.Sub_Jenis_Koleksi,
+				"Kode_Jenis_Koleksi": batuan.Koleksi.Kode_Jenis_Koleksi,
+				"Kelompok_Koleksi":   batuan.Koleksi.Kelompok_Koleksi,
+				"Deskripsi_Koleksi":  batuan.Koleksi.Deskripsi_Koleksi,
+			},
+			"Lokasi_Storage": bson.M{
+				"Ruang_Storage": batuan.Lokasi_Storage.Ruang_Storage,
+				"Lantai":        batuan.Lokasi_Storage.Lantai,
+				"Lajur":         batuan.Lokasi_Storage.Lajur,
+				"Lemari":        batuan.Lokasi_Storage.Lemari,
+				"Laci":          batuan.Lokasi_Storage.Laci,
+				"Slot":          batuan.Lokasi_Storage.Slot,
+			},
+			"Lokasi_Non_Storage": bson.M{
+				"Nama_Non_Storage": batuan.Lokasi_Non_Storage.Nama_Non_Storage,
+			},
+			"Nama_Formasi":     batuan.Nama_Formasi,
+			"Keterangan":       batuan.Keterangan,
+			"Pulau":            batuan.Pulau,
+			"Alamat_Lengkap":   batuan.Alamat_Lengkap,
+			"Koordinat_X":      batuan.Koordinat_X,
+			"Koordinat_Y":      batuan.Koordinat_Y,
+			"Koordinat_Z":      batuan.Koordinat_Z,
+			"Tahun_Perolehan":  batuan.Tahun_Perolehan,
+			"Kolektor":         batuan.Kolektor,
+			"Publikasi":        batuan.Publikasi,
+			"Kepemilikan_Awal": batuan.Kepemilikan_Awal,
+			"URL":              batuan.URL,
+			"Nilai_Perolehan":  batuan.Nilai_Perolehan,
+			"Nilai_Buku":       batuan.Nilai_Buku,
+			"Gambar_1":         batuan.Gambar_1,
+			"Gambar_2":         batuan.Gambar_2,
+			"Gambar_3":         batuan.Gambar_3,
+		}
 		result, err := batuanCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
 
 		if err != nil {
@@ -200,5 +331,143 @@ func GetAllBatuans() gin.HandlerFunc {
 		c.JSON(http.StatusOK,
 			responses.BatuanResponse{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": batuans}},
 		)
+	}
+}
+
+func ExportBatuanToExcel() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		file := xlsx.NewFile()
+		sheet, err := file.AddSheet("Data Batuan")
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.BatuanResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
+
+		rows, err := batuanCollection.Find(ctx, bson.M{})
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.BatuanResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
+
+		// add headers
+		row := sheet.AddRow()
+		row.AddCell().Value = "No Register"
+		row.AddCell().Value = "No Inventaris"
+		row.AddCell().Value = "No Awal"
+		row.AddCell().Value = "Kode BMN"
+		row.AddCell().Value = "Nup BMN"
+		row.AddCell().Value = "Merk BMN"
+		row.AddCell().Value = "Determinator"
+		row.AddCell().Value = "Nama Peta"
+		row.AddCell().Value = "Skala Peta"
+		row.AddCell().Value = "Koleksi Peta"
+		row.AddCell().Value = "Lembar Peta"
+		row.AddCell().Value = "Cara Perolehan"
+		row.AddCell().Value = "Umur"
+		row.AddCell().Value = "Nama Satuan"
+		row.AddCell().Value = "Kondisi"
+		row.AddCell().Value = "Nama Provinsi"
+		row.AddCell().Value = "Nama Kabupaten"
+		row.AddCell().Value = "Keterangan Luar Negeri"
+		row.AddCell().Value = "Nama Koleksi"
+		row.AddCell().Value = "Jenis Koleksi"
+		row.AddCell().Value = "Sub Jenis Koleksi"
+		row.AddCell().Value = "Kode Jenis Koleksi"
+		row.AddCell().Value = "Deskripsi Koleksi"
+		row.AddCell().Value = "Kelompok Koleksi"
+		row.AddCell().Value = "Ruang Storage"
+		row.AddCell().Value = "Lantai"
+		row.AddCell().Value = "Lajur"
+		row.AddCell().Value = "Lemari"
+		row.AddCell().Value = "Laci"
+		row.AddCell().Value = "Slot"
+		row.AddCell().Value = "Nama Non Storage"
+		row.AddCell().Value = "Nama Formasi"
+		row.AddCell().Value = "Keterangan"
+		row.AddCell().Value = "Pulau"
+		row.AddCell().Value = "Alamat Lengkap"
+		row.AddCell().Value = "Koordinat X"
+		row.AddCell().Value = "Koordinat Y"
+		row.AddCell().Value = "Koordinat Z"
+		row.AddCell().Value = "Tahun Perolehan"
+		row.AddCell().Value = "Kolektor"
+		row.AddCell().Value = "Publikasi"
+		row.AddCell().Value = "Kepemilikan Awal"
+		row.AddCell().Value = "URL"
+		row.AddCell().Value = "Nilai Perolehan"
+		row.AddCell().Value = "Nilai Buku"
+		row.AddCell().Value = "Gambar 1"
+		row.AddCell().Value = "Gambar 2"
+		row.AddCell().Value = "Gambar 3"
+
+		for rows.Next(ctx) {
+			var batuan models.Batuan
+			if err := rows.Decode(&batuan); err != nil {
+				c.JSON(http.StatusInternalServerError, responses.BatuanResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+				return
+			}
+
+			row := sheet.AddRow()
+			row.AddCell().Value = batuan.Nomer.No_Reg
+			row.AddCell().Value = batuan.Nomer.No_Inv
+			row.AddCell().Value = batuan.Nomer.No_Awal
+			row.AddCell().Value = batuan.Barang_Milik_Negara.Kode_Bmn
+			row.AddCell().Value = batuan.Barang_Milik_Negara.Nup_Bmn
+			row.AddCell().Value = batuan.Barang_Milik_Negara.Merk_Bmn
+			row.AddCell().Value = batuan.Determinator
+			row.AddCell().Value = batuan.Peta.Nama_Peta
+			row.AddCell().Value = batuan.Peta.Skala_Peta
+			row.AddCell().Value = batuan.Peta.Koleksi_Peta
+			row.AddCell().Value = batuan.Peta.Lembar_Peta
+			row.AddCell().Value = batuan.Cara_Perolehan
+			row.AddCell().Value = batuan.Umur
+			row.AddCell().Value = batuan.Nama_Satuan
+			row.AddCell().Value = batuan.Kondisi
+			row.AddCell().Value = batuan.Dalam_Negeri.Nama_Provinsi
+			row.AddCell().Value = batuan.Dalam_Negeri.Nama_Kabupaten
+			row.AddCell().Value = batuan.Luar_Negeri.Keterangan_LN
+			row.AddCell().Value = batuan.Koleksi.Nama_Koleksi
+			row.AddCell().Value = batuan.Koleksi.Jenis_Koleksi
+			row.AddCell().Value = batuan.Koleksi.Sub_Jenis_Koleksi
+			row.AddCell().Value = batuan.Koleksi.Kode_Jenis_Koleksi
+			row.AddCell().Value = batuan.Koleksi.Deskripsi_Koleksi
+			row.AddCell().Value = batuan.Koleksi.Kelompok_Koleksi
+			row.AddCell().Value = batuan.Lokasi_Storage.Ruang_Storage
+			row.AddCell().Value = batuan.Lokasi_Storage.Lantai
+			row.AddCell().Value = batuan.Lokasi_Storage.Lajur
+			row.AddCell().Value = batuan.Lokasi_Storage.Lemari
+			row.AddCell().Value = batuan.Lokasi_Storage.Laci
+			row.AddCell().Value = batuan.Lokasi_Storage.Slot
+			row.AddCell().Value = batuan.Lokasi_Non_Storage.Nama_Non_Storage
+			row.AddCell().Value = batuan.Nama_Formasi
+			row.AddCell().Value = batuan.Keterangan
+			row.AddCell().Value = batuan.Pulau
+			row.AddCell().Value = batuan.Alamat_Lengkap
+			row.AddCell().Value = batuan.Koordinat_X
+			row.AddCell().Value = batuan.Koordinat_Y
+			row.AddCell().Value = batuan.Koordinat_Z
+			row.AddCell().Value = batuan.Tahun_Perolehan
+			row.AddCell().Value = batuan.Kolektor
+			row.AddCell().Value = batuan.Publikasi
+			row.AddCell().Value = batuan.Kepemilikan_Awal
+			row.AddCell().Value = batuan.URL
+			row.AddCell().Value = batuan.Nilai_Perolehan
+			row.AddCell().Value = batuan.Nilai_Buku
+			row.AddCell().Value = batuan.Gambar_1
+			row.AddCell().Value = batuan.Gambar_2
+			row.AddCell().Value = batuan.Gambar_3
+		}
+		filename := "data_batuan.xlsx"
+		err = file.Save(filename)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.BatuanResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
+		c.Header("Content-Disposition", "attachment; filename="+filename)
+		c.Header("Content-Type", "application/octet-stream")
+		c.File(filename)
 	}
 }

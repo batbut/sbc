@@ -12,4 +12,5 @@ func BatuanRoute(router *gin.Engine) {
 	router.PUT("/batuan/:batuanId", controllers.EditBatuan())
 	router.DELETE("/batuan/:batuanId", controllers.DeleteBatuan())
 	router.GET("/batuans", controllers.GetAllBatuans())
+	router.GET("/batuans/export", controllers.ExportBatuanToExcel())
 }

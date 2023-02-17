@@ -7,13 +7,17 @@ Pembuatan Aplikasi Pengelolaan Koleksi pada Museum Geologi Bandung (Rest API) de
 ```sh
 go run main.go
 ```
-2. Generate Swagger Documentation
+2. Backend (API) Deployed Link in Heroku
 ```sh
-swag init
+https://sbc-sebatcabut.herokuapp.com/
+```
+3. Front-end (React JS)
+```
+https://museumgeologibandung.netlify.app/
 ```
 
 ## Swagger Documentation
-You can open this link to see swagger documentation this app
+You can go to the following link to view the API documentation for this application
 ```sh
 https://sbc-sebatcabut.herokuapp.com/swagger/index.html
 ```

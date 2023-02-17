@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "https://sbc-sebatcabut.herokuapp.com/",
+    "host": "sbc-sebatcabut.herokuapp.com/",
     "basePath": "/v1",
     "paths": {
         "/batuan": {

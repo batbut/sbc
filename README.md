@@ -1,4 +1,19 @@
 # Backend Museum Geologi (Restful API)
 
-## DOKUMENTASI API BY POSTMAN
-1. Dokumentasi Endpoint Fosil : https://documenter.getpostman.com/view/20579561/2s8YzQW4Xh
+Pembuatan Aplikasi Pengelolaan Koleksi pada Museum Geologi Bandung (Rest API) dengan Go Language dan Framework Gin serta MongoDB.
+
+## Usage
+1. Running in port: 80
+```sh
+go run main.go
+```
+2. Generate Swagger Documentation
+```sh
+swag init
+```
+
+## Swagger Documentation
+You can open this link to see swagger documentation this app
+```sh
+https://sbc-sebatcabut.herokuapp.com/swagger/index.html
+```

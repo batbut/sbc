@@ -19,7 +19,7 @@ import (
 // @title Museum Geologi Bandung
 // @version 1.0
 // @description API Batuan, Fosil dan Sumber Daya Geologi
-// @host sbc-sebatcabut.herokuapp.com/
+// @host sbc-sebatcabut.herokuapp.com
 // @BasePath /v1
 func main() {
 	configs.ConnectDB()

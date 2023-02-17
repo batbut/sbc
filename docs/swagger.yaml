@@ -576,7 +576,7 @@ definitions:
       status:
         type: integer
     type: object
-host: sbc-sebatcabut.herokuapp.com/
+host: sbc-sebatcabut.herokuapp.com
 info:
   contact: {}
   description: API Batuan, Fosil dan Sumber Daya Geologi

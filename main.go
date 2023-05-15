@@ -19,7 +19,7 @@ import (
 // @title Museum Geologi Bandung
 // @version 1.0
 // @description API Batuan, Fosil dan Sumber Daya Geologi
-// @host sbc-sebatcabut.herokuapp.com
+// @host localhost:80
 // @BasePath /v1
 func main() {
 	configs.ConnectDB()
@@ -35,7 +35,7 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
-			return origin == "https://sbc-sebatcabut.herokuapp.com"
+			return origin == "http://localhost:80"
 		},
 		MaxAge: 12 * time.Hour,
 	}))
